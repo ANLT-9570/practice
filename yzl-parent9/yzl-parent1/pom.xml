@@ -16,7 +16,7 @@
         <log4j.version>1.2.17</log4j.version>
         <jackson.version>2.4.2</jackson.version>
         <poi.version>4.0.0</poi.version>
-        <commons-beanutils.version>1.9.2</commons-beanutils.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-collections.version>3.2.1</commons-collections.version>
         <commons-lang.version>2.6</commons-lang.version>
         <xmlbeans.version>2.6.0</xmlbeans.version>

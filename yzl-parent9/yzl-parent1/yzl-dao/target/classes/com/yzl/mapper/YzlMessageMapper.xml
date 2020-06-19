@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzl.mapper.YzlMessageMapper" >
+
+    <resultMap id="BaseResultMap" type="com.yzl.pojo.YzlMessage" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="rid" property="rid" jdbcType="INTEGER" />
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="statu" property="statu" jdbcType="VARCHAR" />
+        <result column="number" property="number" jdbcType="BIGINT" />
+        <result column="countyCode" property="countycode" jdbcType="VARCHAR" />
+        <result column="GCLB" property="gclb" jdbcType="VARCHAR" />
+        <result column="ZLLB" property="zllb" jdbcType="VARCHAR" />
+        <result column="ZYND" property="zynd" jdbcType="VARCHAR" />
+        <result column="JHND" property="jhnd" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, content, rid, createtime, statu, number, countyCode, GCLB, ZLLB, ZYND, JHND
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yzl.pojo.YzlMessageExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from yzl_message
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from yzl_message
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from yzl_message
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.yzl.pojo.YzlMessageExample" >
+        delete from yzl_message
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.yzl.pojo.YzlMessage" >
+        insert into yzl_message (id, content, rid, 
+            createtime, statu, number, 
+            countyCode, GCLB, ZLLB, 
+            ZYND, JHND)
+        values (#{id,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{rid,jdbcType=INTEGER}, 
+            #{createtime,jdbcType=TIMESTAMP}, #{statu,jdbcType=VARCHAR}, #{number,jdbcType=BIGINT}, 
+            #{countycode,jdbcType=VARCHAR}, #{gclb,jdbcType=VARCHAR}, #{zllb,jdbcType=VARCHAR}, 
+            #{zynd,jdbcType=VARCHAR}, #{jhnd,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.yzl.pojo.YzlMessage" >
+        insert into yzl_message
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="content != null" >
+                content,
+            </if>
+            <if test="rid != null" >
+                rid,
+            </if>
+            <if test="createtime != null" >
+                createtime,
+            </if>
+            <if test="statu != null" >
+                statu,
+            </if>
+            <if test="number != null" >
+                number,
+            </if>
+            <if test="countycode != null" >
+                countyCode,
+            </if>
+            <if test="gclb != null" >
+                GCLB,
+            </if>
+            <if test="zllb != null" >
+                ZLLB,
+            </if>
+            <if test="zynd != null" >
+                ZYND,
+            </if>
+            <if test="jhnd != null" >
+                JHND,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="rid != null" >
+                #{rid,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="statu != null" >
+                #{statu,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null" >
+                #{number,jdbcType=BIGINT},
+            </if>
+            <if test="countycode != null" >
+                #{countycode,jdbcType=VARCHAR},
+            </if>
+            <if test="gclb != null" >
+                #{gclb,jdbcType=VARCHAR},
+            </if>
+            <if test="zllb != null" >
+                #{zllb,jdbcType=VARCHAR},
+            </if>
+            <if test="zynd != null" >
+                #{zynd,jdbcType=VARCHAR},
+            </if>
+            <if test="jhnd != null" >
+                #{jhnd,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.yzl.pojo.YzlMessageExample" resultType="java.lang.Integer" >
+        select count(*) from yzl_message
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update yzl_message
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.content != null" >
+                content = #{record.content,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rid != null" >
+                rid = #{record.rid,jdbcType=INTEGER},
+            </if>
+            <if test="record.createtime != null" >
+                createtime = #{record.createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.statu != null" >
+                statu = #{record.statu,jdbcType=VARCHAR},
+            </if>
+            <if test="record.number != null" >
+                number = #{record.number,jdbcType=BIGINT},
+            </if>
+            <if test="record.countycode != null" >
+                countyCode = #{record.countycode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gclb != null" >
+                GCLB = #{record.gclb,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zllb != null" >
+                ZLLB = #{record.zllb,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zynd != null" >
+                ZYND = #{record.zynd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.jhnd != null" >
+                JHND = #{record.jhnd,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update yzl_message
+        set id = #{record.id,jdbcType=BIGINT},
+            content = #{record.content,jdbcType=VARCHAR},
+            rid = #{record.rid,jdbcType=INTEGER},
+            createtime = #{record.createtime,jdbcType=TIMESTAMP},
+            statu = #{record.statu,jdbcType=VARCHAR},
+            number = #{record.number,jdbcType=BIGINT},
+            countyCode = #{record.countycode,jdbcType=VARCHAR},
+            GCLB = #{record.gclb,jdbcType=VARCHAR},
+            ZLLB = #{record.zllb,jdbcType=VARCHAR},
+            ZYND = #{record.zynd,jdbcType=VARCHAR},
+            JHND = #{record.jhnd,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.yzl.pojo.YzlMessage" >
+        update yzl_message
+        <set >
+            <if test="content != null" >
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="rid != null" >
+                rid = #{rid,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="statu != null" >
+                statu = #{statu,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null" >
+                number = #{number,jdbcType=BIGINT},
+            </if>
+            <if test="countycode != null" >
+                countyCode = #{countycode,jdbcType=VARCHAR},
+            </if>
+            <if test="gclb != null" >
+                GCLB = #{gclb,jdbcType=VARCHAR},
+            </if>
+            <if test="zllb != null" >
+                ZLLB = #{zllb,jdbcType=VARCHAR},
+            </if>
+            <if test="zynd != null" >
+                ZYND = #{zynd,jdbcType=VARCHAR},
+            </if>
+            <if test="jhnd != null" >
+                JHND = #{jhnd,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.yzl.pojo.YzlMessage" >
+        update yzl_message
+        set content = #{content,jdbcType=VARCHAR},
+            rid = #{rid,jdbcType=INTEGER},
+            createtime = #{createtime,jdbcType=TIMESTAMP},
+            statu = #{statu,jdbcType=VARCHAR},
+            number = #{number,jdbcType=BIGINT},
+            countyCode = #{countycode,jdbcType=VARCHAR},
+            GCLB = #{gclb,jdbcType=VARCHAR},
+            ZLLB = #{zllb,jdbcType=VARCHAR},
+            ZYND = #{zynd,jdbcType=VARCHAR},
+            JHND = #{jhnd,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    
+    <select id="countMessageNumber" resultType="int">
+    	SELECT ifnull(sum(t.number),0) FROM  
+	    	(SELECT max(number) as number FROM `yzl_message` m WHERE m.`countyCode` in 
+	    		<foreach collection="authoritys" item="authority" open="(" separator="," close=")">
+					#{authority}
+				</foreach>
+	 			and
+				(statu Not like "%"#{keywork}"%" 
+				OR statu IS NULL)
+	 			group by countyCode) as t
+    </select>
+    
+
+    
+   <select id="countMessageNumberGroupByCountyCode" resultType="com.yzl.utils.vo.BacklogVO">
+	  SELECT d.city,d.county,MAX(number) AS "number" ,max(m.createtime) as "time" FROM `yzl_message` m INNER JOIN `yzl_district` d ON d.Anumber=m.countyCode   
+			WHERE
+	 			m.`countyCode` in 
+	    		<foreach collection="authoritys" item="authority" open="(" separator="," close=")">
+					#{authority}
+				</foreach>
+				and
+					(statu NOT LIKE "%"#{keywork}"%" 
+					OR statu IS NULL)
+	 			and (number IS NOT NULL or number>0) 
+	 			GROUP BY countyCode
+	 			
+    </select>
+    
+    <select id="queryCountyCodeByStatuAndCountyCode" resultType="String">
+    	SELECT 
+    	  countyCode
+    		FROM `yzl_message` m WHERE m.`countyCode` in 
+    		<foreach collection="authoritys" item="authority" open="(" separator="," close=")">
+				#{authority}
+			</foreach>
+ 			and (statu not like "%"#{userId}"%"
+ 			or statu IS NULL) 
+ 			and number>0
+ 			group by countyCode
+    </select>
+    
+    <update id="updateStatuByUserIdAndCountCode">
+    	update yzl_message set statu=CONCAT(IFNULL(statu,""),",",#{keywork})
+    	where (statu not like "%"#{keywork}"%" OR statu IS NULL)
+    	 and countyCode in
+    	 	<foreach collection="authoritys" item="authority" open="(" separator="," close=")">
+				 #{authority}
+			</foreach>
+    </update>
+    
+    
+    <select id="queryDISTINCTCountyCodeByStatuAndCountyCode" resultType="String">
+    	SELECT 
+    	  DISTINCT countyCode
+    		FROM `yzl_message` m WHERE m.`countyCode` in 
+    		<foreach collection="authoritys" item="authority" open="(" separator="," close=")">
+				#{authority}
+			</foreach>
+ 			and (statu not like "%"#{keywork}"%"
+ 			or statu IS NULL) 
+ 			and number>0
+ 			group by countyCode
+    </select>
+    
+        <select id="queryByAuthoritysAndStatu" resultType="com.yzl.pojo.YzlMessage">
+    	SELECT 
+    	 	countyCode,gclb,zynd,jhnd,zllb
+    		FROM `yzl_message` m WHERE m.`countyCode` in 
+    		<foreach collection="authoritys" item="authority" open="(" separator="," close=")">
+				#{authority}
+			</foreach>
+ 			and (statu not like "%"#{keywork}"%"
+ 			or statu IS NULL) 
+ 			and number>0
+ 			group by countyCode,gclb,zynd,jhnd,zllb
+    </select>
+    
+    
+</mapper>

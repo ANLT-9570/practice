@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzl.mapper.YzlMonitoringstatisticsMapper" >
+
+    <resultMap id="BaseResultMap" type="com.yzl.pojo.YzlMonitoringstatistics" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="did" property="did" jdbcType="BIGINT" />
+        <result column="eid" property="eid" jdbcType="BIGINT" />
+        <result column="tid" property="tid" jdbcType="VARCHAR" />
+        <result column="time" property="time" jdbcType="VARCHAR" />
+        <result column="inspectionReportArea" property="inspectionreportarea" jdbcType="VARCHAR" />
+        <result column="verifyArea" property="verifyarea" jdbcType="VARCHAR" />
+        <result column="certifiedArea" property="certifiedarea" jdbcType="VARCHAR" />
+        <result column="jobDesignArea" property="jobdesignarea" jdbcType="VARCHAR" />
+        <result column="designConstructionAccordingOperation" property="designconstructionaccordingoperation" jdbcType="VARCHAR" />
+        <result column="fileSize" property="filesize" jdbcType="VARCHAR" />
+        <result column="countyInspectionArea" property="countyinspectionarea" jdbcType="VARCHAR" />
+        <result column="designForestArea" property="designforestarea" jdbcType="VARCHAR" />
+        <result column="verifyForestArea" property="verifyforestarea" jdbcType="VARCHAR" />
+        <result column="bareArea" property="barearea" jdbcType="VARCHAR" />
+        <result column="managementArea" property="managementarea" jdbcType="VARCHAR" />
+        <result column="areaVerificationRate" property="areaverificationrate" jdbcType="VARCHAR" />
+        <result column="verifyAreaPassRate" property="verifyareapassrate" jdbcType="VARCHAR" />
+        <result column="reportAreaQualificationRate" property="reportareaqualificationrate" jdbcType="VARCHAR" />
+        <result column="reportRetentionRateYear" property="reportretentionrateyear" jdbcType="VARCHAR" />
+        <result column="afforestationReportsEligibleYear" property="afforestationreportseligibleyear" jdbcType="VARCHAR" />
+        <result column="countySelfInspectionArea" property="countyselfinspectionarea" jdbcType="VARCHAR" />
+        <result column="calculatedVerificationArea" property="calculatedverificationarea" jdbcType="VARCHAR" />
+        <result column="calculateQualifiedArea" property="calculatequalifiedarea" jdbcType="VARCHAR" />
+        <result column="scheduledTask" property="scheduledtask" jdbcType="VARCHAR" />
+        <result column="taskCompletionRate" property="taskcompletionrate" jdbcType="VARCHAR" />
+        <result column="jobDesignRate" property="jobdesignrate" jdbcType="VARCHAR" />
+        <result column="accordingDesignConstructionRate" property="accordingdesignconstructionrate" jdbcType="VARCHAR" />
+        <result column="byInputtingRate" property="byinputtingrate" jdbcType="VARCHAR" />
+        <result column="selfCheckingRate" property="selfcheckingrate" jdbcType="VARCHAR" />
+        <result column="selfCheckingsRate" property="selfcheckingsrate" jdbcType="VARCHAR" />
+        <result column="fileRate" property="filerate" jdbcType="VARCHAR" />
+        <result column="raisingRates" property="raisingrates" jdbcType="VARCHAR" />
+        <result column="afforestationRate" property="afforestationrate" jdbcType="VARCHAR" />
+        <result column="theManagementRate" property="themanagementrate" jdbcType="VARCHAR" />
+        <result column="mark" property="mark" jdbcType="VARCHAR" />
+        <result column="SFYDA" property="sfyda" jdbcType="VARCHAR" />
+        <result column="SFFY" property="sffy" jdbcType="VARCHAR" />
+        <result column="SFGH" property="sfgh" jdbcType="VARCHAR" />
+        <result column="SFZJ" property="sfzj" jdbcType="VARCHAR" />
+        <result column="YLFS" property="ylfs" jdbcType="VARCHAR" />
+        <result column="CLMJ" property="clmj" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, did, eid, tid, time, inspectionReportArea, verifyArea, certifiedArea, jobDesignArea, 
+        designConstructionAccordingOperation, fileSize, countyInspectionArea, designForestArea, 
+        verifyForestArea, bareArea, managementArea, areaVerificationRate, verifyAreaPassRate, 
+        reportAreaQualificationRate, reportRetentionRateYear, afforestationReportsEligibleYear, 
+        countySelfInspectionArea, calculatedVerificationArea, calculateQualifiedArea, scheduledTask, 
+        taskCompletionRate, jobDesignRate, accordingDesignConstructionRate, byInputtingRate, 
+        selfCheckingRate, selfCheckingsRate, fileRate, raisingRates, afforestationRate, theManagementRate, 
+        mark, SFYDA, SFFY, SFGH, SFZJ, YLFS, CLMJ
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yzl.pojo.YzlMonitoringstatisticsExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from yzl_monitoringstatistics
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from yzl_monitoringstatistics
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from yzl_monitoringstatistics
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.yzl.pojo.YzlMonitoringstatisticsExample" >
+        delete from yzl_monitoringstatistics
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.yzl.pojo.YzlMonitoringstatistics" >
+        insert into yzl_monitoringstatistics (id, did, eid, tid, 
+            time, inspectionReportArea, verifyArea, 
+            certifiedArea, jobDesignArea, designConstructionAccordingOperation, 
+            fileSize, countyInspectionArea, designForestArea, 
+            verifyForestArea, bareArea, managementArea, 
+            areaVerificationRate, verifyAreaPassRate, 
+            reportAreaQualificationRate, reportRetentionRateYear, 
+            afforestationReportsEligibleYear, countySelfInspectionArea, 
+            calculatedVerificationArea, calculateQualifiedArea, 
+            scheduledTask, taskCompletionRate, jobDesignRate, 
+            accordingDesignConstructionRate, byInputtingRate, 
+            selfCheckingRate, selfCheckingsRate, 
+            fileRate, raisingRates, afforestationRate, 
+            theManagementRate, mark, SFYDA, 
+            SFFY, SFGH, SFZJ, 
+            YLFS, CLMJ)
+        values (#{id,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{eid,jdbcType=BIGINT}, #{tid,jdbcType=VARCHAR}, 
+            #{time,jdbcType=VARCHAR}, #{inspectionreportarea,jdbcType=VARCHAR}, #{verifyarea,jdbcType=VARCHAR}, 
+            #{certifiedarea,jdbcType=VARCHAR}, #{jobdesignarea,jdbcType=VARCHAR}, #{designconstructionaccordingoperation,jdbcType=VARCHAR}, 
+            #{filesize,jdbcType=VARCHAR}, #{countyinspectionarea,jdbcType=VARCHAR}, #{designforestarea,jdbcType=VARCHAR}, 
+            #{verifyforestarea,jdbcType=VARCHAR}, #{barearea,jdbcType=VARCHAR}, #{managementarea,jdbcType=VARCHAR}, 
+            #{areaverificationrate,jdbcType=VARCHAR}, #{verifyareapassrate,jdbcType=VARCHAR}, 
+            #{reportareaqualificationrate,jdbcType=VARCHAR}, #{reportretentionrateyear,jdbcType=VARCHAR}, 
+            #{afforestationreportseligibleyear,jdbcType=VARCHAR}, #{countyselfinspectionarea,jdbcType=VARCHAR}, 
+            #{calculatedverificationarea,jdbcType=VARCHAR}, #{calculatequalifiedarea,jdbcType=VARCHAR}, 
+            #{scheduledtask,jdbcType=VARCHAR}, #{taskcompletionrate,jdbcType=VARCHAR}, #{jobdesignrate,jdbcType=VARCHAR}, 
+            #{accordingdesignconstructionrate,jdbcType=VARCHAR}, #{byinputtingrate,jdbcType=VARCHAR}, 
+            #{selfcheckingrate,jdbcType=VARCHAR}, #{selfcheckingsrate,jdbcType=VARCHAR}, 
+            #{filerate,jdbcType=VARCHAR}, #{raisingrates,jdbcType=VARCHAR}, #{afforestationrate,jdbcType=VARCHAR}, 
+            #{themanagementrate,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, #{sfyda,jdbcType=VARCHAR}, 
+            #{sffy,jdbcType=VARCHAR}, #{sfgh,jdbcType=VARCHAR}, #{sfzj,jdbcType=VARCHAR}, 
+            #{ylfs,jdbcType=VARCHAR}, #{clmj,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.yzl.pojo.YzlMonitoringstatistics" >
+        insert into yzl_monitoringstatistics
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="did != null" >
+                did,
+            </if>
+            <if test="eid != null" >
+                eid,
+            </if>
+            <if test="tid != null" >
+                tid,
+            </if>
+            <if test="time != null" >
+                time,
+            </if>
+            <if test="inspectionreportarea != null" >
+                inspectionReportArea,
+            </if>
+            <if test="verifyarea != null" >
+                verifyArea,
+            </if>
+            <if test="certifiedarea != null" >
+                certifiedArea,
+            </if>
+            <if test="jobdesignarea != null" >
+                jobDesignArea,
+            </if>
+            <if test="designconstructionaccordingoperation != null" >
+                designConstructionAccordingOperation,
+            </if>
+            <if test="filesize != null" >
+                fileSize,
+            </if>
+            <if test="countyinspectionarea != null" >
+                countyInspectionArea,
+            </if>
+            <if test="designforestarea != null" >
+                designForestArea,
+            </if>
+            <if test="verifyforestarea != null" >
+                verifyForestArea,
+            </if>
+            <if test="barearea != null" >
+                bareArea,
+            </if>
+            <if test="managementarea != null" >
+                managementArea,
+            </if>
+            <if test="areaverificationrate != null" >
+                areaVerificationRate,
+            </if>
+            <if test="verifyareapassrate != null" >
+                verifyAreaPassRate,
+            </if>
+            <if test="reportareaqualificationrate != null" >
+                reportAreaQualificationRate,
+            </if>
+            <if test="reportretentionrateyear != null" >
+                reportRetentionRateYear,
+            </if>
+            <if test="afforestationreportseligibleyear != null" >
+                afforestationReportsEligibleYear,
+            </if>
+            <if test="countyselfinspectionarea != null" >
+                countySelfInspectionArea,
+            </if>
+            <if test="calculatedverificationarea != null" >
+                calculatedVerificationArea,
+            </if>
+            <if test="calculatequalifiedarea != null" >
+                calculateQualifiedArea,
+            </if>
+            <if test="scheduledtask != null" >
+                scheduledTask,
+            </if>
+            <if test="taskcompletionrate != null" >
+                taskCompletionRate,
+            </if>
+            <if test="jobdesignrate != null" >
+                jobDesignRate,
+            </if>
+            <if test="accordingdesignconstructionrate != null" >
+                accordingDesignConstructionRate,
+            </if>
+            <if test="byinputtingrate != null" >
+                byInputtingRate,
+            </if>
+            <if test="selfcheckingrate != null" >
+                selfCheckingRate,
+            </if>
+            <if test="selfcheckingsrate != null" >
+                selfCheckingsRate,
+            </if>
+            <if test="filerate != null" >
+                fileRate,
+            </if>
+            <if test="raisingrates != null" >
+                raisingRates,
+            </if>
+            <if test="afforestationrate != null" >
+                afforestationRate,
+            </if>
+            <if test="themanagementrate != null" >
+                theManagementRate,
+            </if>
+            <if test="mark != null" >
+                mark,
+            </if>
+            <if test="sfyda != null" >
+                SFYDA,
+            </if>
+            <if test="sffy != null" >
+                SFFY,
+            </if>
+            <if test="sfgh != null" >
+                SFGH,
+            </if>
+            <if test="sfzj != null" >
+                SFZJ,
+            </if>
+            <if test="ylfs != null" >
+                YLFS,
+            </if>
+            <if test="clmj != null" >
+                CLMJ,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="did != null" >
+                #{did,jdbcType=BIGINT},
+            </if>
+            <if test="eid != null" >
+                #{eid,jdbcType=BIGINT},
+            </if>
+            <if test="tid != null" >
+                #{tid,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null" >
+                #{time,jdbcType=VARCHAR},
+            </if>
+            <if test="inspectionreportarea != null" >
+                #{inspectionreportarea,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyarea != null" >
+                #{verifyarea,jdbcType=VARCHAR},
+            </if>
+            <if test="certifiedarea != null" >
+                #{certifiedarea,jdbcType=VARCHAR},
+            </if>
+            <if test="jobdesignarea != null" >
+                #{jobdesignarea,jdbcType=VARCHAR},
+            </if>
+            <if test="designconstructionaccordingoperation != null" >
+                #{designconstructionaccordingoperation,jdbcType=VARCHAR},
+            </if>
+            <if test="filesize != null" >
+                #{filesize,jdbcType=VARCHAR},
+            </if>
+            <if test="countyinspectionarea != null" >
+                #{countyinspectionarea,jdbcType=VARCHAR},
+            </if>
+            <if test="designforestarea != null" >
+                #{designforestarea,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyforestarea != null" >
+                #{verifyforestarea,jdbcType=VARCHAR},
+            </if>
+            <if test="barearea != null" >
+                #{barearea,jdbcType=VARCHAR},
+            </if>
+            <if test="managementarea != null" >
+                #{managementarea,jdbcType=VARCHAR},
+            </if>
+            <if test="areaverificationrate != null" >
+                #{areaverificationrate,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyareapassrate != null" >
+                #{verifyareapassrate,jdbcType=VARCHAR},
+            </if>
+            <if test="reportareaqualificationrate != null" >
+                #{reportareaqualificationrate,jdbcType=VARCHAR},
+            </if>
+            <if test="reportretentionrateyear != null" >
+                #{reportretentionrateyear,jdbcType=VARCHAR},
+            </if>
+            <if test="afforestationreportseligibleyear != null" >
+                #{afforestationreportseligibleyear,jdbcType=VARCHAR},
+            </if>
+            <if test="countyselfinspectionarea != null" >
+                #{countyselfinspectionarea,jdbcType=VARCHAR},
+            </if>
+            <if test="calculatedverificationarea != null" >
+                #{calculatedverificationarea,jdbcType=VARCHAR},
+            </if>
+            <if test="calculatequalifiedarea != null" >
+                #{calculatequalifiedarea,jdbcType=VARCHAR},
+            </if>
+            <if test="scheduledtask != null" >
+                #{scheduledtask,jdbcType=VARCHAR},
+            </if>
+            <if test="taskcompletionrate != null" >
+                #{taskcompletionrate,jdbcType=VARCHAR},
+            </if>
+            <if test="jobdesignrate != null" >
+                #{jobdesignrate,jdbcType=VARCHAR},
+            </if>
+            <if test="accordingdesignconstructionrate != null" >
+                #{accordingdesignconstructionrate,jdbcType=VARCHAR},
+            </if>
+            <if test="byinputtingrate != null" >
+                #{byinputtingrate,jdbcType=VARCHAR},
+            </if>
+            <if test="selfcheckingrate != null" >
+                #{selfcheckingrate,jdbcType=VARCHAR},
+            </if>
+            <if test="selfcheckingsrate != null" >
+                #{selfcheckingsrate,jdbcType=VARCHAR},
+            </if>
+            <if test="filerate != null" >
+                #{filerate,jdbcType=VARCHAR},
+            </if>
+            <if test="raisingrates != null" >
+                #{raisingrates,jdbcType=VARCHAR},
+            </if>
+            <if test="afforestationrate != null" >
+                #{afforestationrate,jdbcType=VARCHAR},
+            </if>
+            <if test="themanagementrate != null" >
+                #{themanagementrate,jdbcType=VARCHAR},
+            </if>
+            <if test="mark != null" >
+                #{mark,jdbcType=VARCHAR},
+            </if>
+            <if test="sfyda != null" >
+                #{sfyda,jdbcType=VARCHAR},
+            </if>
+            <if test="sffy != null" >
+                #{sffy,jdbcType=VARCHAR},
+            </if>
+            <if test="sfgh != null" >
+                #{sfgh,jdbcType=VARCHAR},
+            </if>
+            <if test="sfzj != null" >
+                #{sfzj,jdbcType=VARCHAR},
+            </if>
+            <if test="ylfs != null" >
+                #{ylfs,jdbcType=VARCHAR},
+            </if>
+            <if test="clmj != null" >
+                #{clmj,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.yzl.pojo.YzlMonitoringstatisticsExample" resultType="java.lang.Integer" >
+        select count(*) from yzl_monitoringstatistics
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update yzl_monitoringstatistics
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.did != null" >
+                did = #{record.did,jdbcType=BIGINT},
+            </if>
+            <if test="record.eid != null" >
+                eid = #{record.eid,jdbcType=BIGINT},
+            </if>
+            <if test="record.tid != null" >
+                tid = #{record.tid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.time != null" >
+                time = #{record.time,jdbcType=VARCHAR},
+            </if>
+            <if test="record.inspectionreportarea != null" >
+                inspectionReportArea = #{record.inspectionreportarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.verifyarea != null" >
+                verifyArea = #{record.verifyarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.certifiedarea != null" >
+                certifiedArea = #{record.certifiedarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.jobdesignarea != null" >
+                jobDesignArea = #{record.jobdesignarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.designconstructionaccordingoperation != null" >
+                designConstructionAccordingOperation = #{record.designconstructionaccordingoperation,jdbcType=VARCHAR},
+            </if>
+            <if test="record.filesize != null" >
+                fileSize = #{record.filesize,jdbcType=VARCHAR},
+            </if>
+            <if test="record.countyinspectionarea != null" >
+                countyInspectionArea = #{record.countyinspectionarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.designforestarea != null" >
+                designForestArea = #{record.designforestarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.verifyforestarea != null" >
+                verifyForestArea = #{record.verifyforestarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.barearea != null" >
+                bareArea = #{record.barearea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.managementarea != null" >
+                managementArea = #{record.managementarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.areaverificationrate != null" >
+                areaVerificationRate = #{record.areaverificationrate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.verifyareapassrate != null" >
+                verifyAreaPassRate = #{record.verifyareapassrate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reportareaqualificationrate != null" >
+                reportAreaQualificationRate = #{record.reportareaqualificationrate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reportretentionrateyear != null" >
+                reportRetentionRateYear = #{record.reportretentionrateyear,jdbcType=VARCHAR},
+            </if>
+            <if test="record.afforestationreportseligibleyear != null" >
+                afforestationReportsEligibleYear = #{record.afforestationreportseligibleyear,jdbcType=VARCHAR},
+            </if>
+            <if test="record.countyselfinspectionarea != null" >
+                countySelfInspectionArea = #{record.countyselfinspectionarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.calculatedverificationarea != null" >
+                calculatedVerificationArea = #{record.calculatedverificationarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.calculatequalifiedarea != null" >
+                calculateQualifiedArea = #{record.calculatequalifiedarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.scheduledtask != null" >
+                scheduledTask = #{record.scheduledtask,jdbcType=VARCHAR},
+            </if>
+            <if test="record.taskcompletionrate != null" >
+                taskCompletionRate = #{record.taskcompletionrate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.jobdesignrate != null" >
+                jobDesignRate = #{record.jobdesignrate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accordingdesignconstructionrate != null" >
+                accordingDesignConstructionRate = #{record.accordingdesignconstructionrate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.byinputtingrate != null" >
+                byInputtingRate = #{record.byinputtingrate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.selfcheckingrate != null" >
+                selfCheckingRate = #{record.selfcheckingrate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.selfcheckingsrate != null" >
+                selfCheckingsRate = #{record.selfcheckingsrate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.filerate != null" >
+                fileRate = #{record.filerate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.raisingrates != null" >
+                raisingRates = #{record.raisingrates,jdbcType=VARCHAR},
+            </if>
+            <if test="record.afforestationrate != null" >
+                afforestationRate = #{record.afforestationrate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.themanagementrate != null" >
+                theManagementRate = #{record.themanagementrate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mark != null" >
+                mark = #{record.mark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfyda != null" >
+                SFYDA = #{record.sfyda,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sffy != null" >
+                SFFY = #{record.sffy,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfgh != null" >
+                SFGH = #{record.sfgh,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfzj != null" >
+                SFZJ = #{record.sfzj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ylfs != null" >
+                YLFS = #{record.ylfs,jdbcType=VARCHAR},
+            </if>
+            <if test="record.clmj != null" >
+                CLMJ = #{record.clmj,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update yzl_monitoringstatistics
+        set id = #{record.id,jdbcType=BIGINT},
+            did = #{record.did,jdbcType=BIGINT},
+            eid = #{record.eid,jdbcType=BIGINT},
+            tid = #{record.tid,jdbcType=VARCHAR},
+            time = #{record.time,jdbcType=VARCHAR},
+            inspectionReportArea = #{record.inspectionreportarea,jdbcType=VARCHAR},
+            verifyArea = #{record.verifyarea,jdbcType=VARCHAR},
+            certifiedArea = #{record.certifiedarea,jdbcType=VARCHAR},
+            jobDesignArea = #{record.jobdesignarea,jdbcType=VARCHAR},
+            designConstructionAccordingOperation = #{record.designconstructionaccordingoperation,jdbcType=VARCHAR},
+            fileSize = #{record.filesize,jdbcType=VARCHAR},
+            countyInspectionArea = #{record.countyinspectionarea,jdbcType=VARCHAR},
+            designForestArea = #{record.designforestarea,jdbcType=VARCHAR},
+            verifyForestArea = #{record.verifyforestarea,jdbcType=VARCHAR},
+            bareArea = #{record.barearea,jdbcType=VARCHAR},
+            managementArea = #{record.managementarea,jdbcType=VARCHAR},
+            areaVerificationRate = #{record.areaverificationrate,jdbcType=VARCHAR},
+            verifyAreaPassRate = #{record.verifyareapassrate,jdbcType=VARCHAR},
+            reportAreaQualificationRate = #{record.reportareaqualificationrate,jdbcType=VARCHAR},
+            reportRetentionRateYear = #{record.reportretentionrateyear,jdbcType=VARCHAR},
+            afforestationReportsEligibleYear = #{record.afforestationreportseligibleyear,jdbcType=VARCHAR},
+            countySelfInspectionArea = #{record.countyselfinspectionarea,jdbcType=VARCHAR},
+            calculatedVerificationArea = #{record.calculatedverificationarea,jdbcType=VARCHAR},
+            calculateQualifiedArea = #{record.calculatequalifiedarea,jdbcType=VARCHAR},
+            scheduledTask = #{record.scheduledtask,jdbcType=VARCHAR},
+            taskCompletionRate = #{record.taskcompletionrate,jdbcType=VARCHAR},
+            jobDesignRate = #{record.jobdesignrate,jdbcType=VARCHAR},
+            accordingDesignConstructionRate = #{record.accordingdesignconstructionrate,jdbcType=VARCHAR},
+            byInputtingRate = #{record.byinputtingrate,jdbcType=VARCHAR},
+            selfCheckingRate = #{record.selfcheckingrate,jdbcType=VARCHAR},
+            selfCheckingsRate = #{record.selfcheckingsrate,jdbcType=VARCHAR},
+            fileRate = #{record.filerate,jdbcType=VARCHAR},
+            raisingRates = #{record.raisingrates,jdbcType=VARCHAR},
+            afforestationRate = #{record.afforestationrate,jdbcType=VARCHAR},
+            theManagementRate = #{record.themanagementrate,jdbcType=VARCHAR},
+            mark = #{record.mark,jdbcType=VARCHAR},
+            SFYDA = #{record.sfyda,jdbcType=VARCHAR},
+            SFFY = #{record.sffy,jdbcType=VARCHAR},
+            SFGH = #{record.sfgh,jdbcType=VARCHAR},
+            SFZJ = #{record.sfzj,jdbcType=VARCHAR},
+            YLFS = #{record.ylfs,jdbcType=VARCHAR},
+            CLMJ = #{record.clmj,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.yzl.pojo.YzlMonitoringstatistics" >
+        update yzl_monitoringstatistics
+        <set >
+            <if test="did != null" >
+                did = #{did,jdbcType=BIGINT},
+            </if>
+            <if test="eid != null" >
+                eid = #{eid,jdbcType=BIGINT},
+            </if>
+            <if test="tid != null" >
+                tid = #{tid,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null" >
+                time = #{time,jdbcType=VARCHAR},
+            </if>
+            <if test="inspectionreportarea != null" >
+                inspectionReportArea = #{inspectionreportarea,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyarea != null" >
+                verifyArea = #{verifyarea,jdbcType=VARCHAR},
+            </if>
+            <if test="certifiedarea != null" >
+                certifiedArea = #{certifiedarea,jdbcType=VARCHAR},
+            </if>
+            <if test="jobdesignarea != null" >
+                jobDesignArea = #{jobdesignarea,jdbcType=VARCHAR},
+            </if>
+            <if test="designconstructionaccordingoperation != null" >
+                designConstructionAccordingOperation = #{designconstructionaccordingoperation,jdbcType=VARCHAR},
+            </if>
+            <if test="filesize != null" >
+                fileSize = #{filesize,jdbcType=VARCHAR},
+            </if>
+            <if test="countyinspectionarea != null" >
+                countyInspectionArea = #{countyinspectionarea,jdbcType=VARCHAR},
+            </if>
+            <if test="designforestarea != null" >
+                designForestArea = #{designforestarea,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyforestarea != null" >
+                verifyForestArea = #{verifyforestarea,jdbcType=VARCHAR},
+            </if>
+            <if test="barearea != null" >
+                bareArea = #{barearea,jdbcType=VARCHAR},
+            </if>
+            <if test="managementarea != null" >
+                managementArea = #{managementarea,jdbcType=VARCHAR},
+            </if>
+            <if test="areaverificationrate != null" >
+                areaVerificationRate = #{areaverificationrate,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyareapassrate != null" >
+                verifyAreaPassRate = #{verifyareapassrate,jdbcType=VARCHAR},
+            </if>
+            <if test="reportareaqualificationrate != null" >
+                reportAreaQualificationRate = #{reportareaqualificationrate,jdbcType=VARCHAR},
+            </if>
+            <if test="reportretentionrateyear != null" >
+                reportRetentionRateYear = #{reportretentionrateyear,jdbcType=VARCHAR},
+            </if>
+            <if test="afforestationreportseligibleyear != null" >
+                afforestationReportsEligibleYear = #{afforestationreportseligibleyear,jdbcType=VARCHAR},
+            </if>
+            <if test="countyselfinspectionarea != null" >
+                countySelfInspectionArea = #{countyselfinspectionarea,jdbcType=VARCHAR},
+            </if>
+            <if test="calculatedverificationarea != null" >
+                calculatedVerificationArea = #{calculatedverificationarea,jdbcType=VARCHAR},
+            </if>
+            <if test="calculatequalifiedarea != null" >
+                calculateQualifiedArea = #{calculatequalifiedarea,jdbcType=VARCHAR},
+            </if>
+            <if test="scheduledtask != null" >
+                scheduledTask = #{scheduledtask,jdbcType=VARCHAR},
+            </if>
+            <if test="taskcompletionrate != null" >
+                taskCompletionRate = #{taskcompletionrate,jdbcType=VARCHAR},
+            </if>
+            <if test="jobdesignrate != null" >
+                jobDesignRate = #{jobdesignrate,jdbcType=VARCHAR},
+            </if>
+            <if test="accordingdesignconstructionrate != null" >
+                accordingDesignConstructionRate = #{accordingdesignconstructionrate,jdbcType=VARCHAR},
+            </if>
+            <if test="byinputtingrate != null" >
+                byInputtingRate = #{byinputtingrate,jdbcType=VARCHAR},
+            </if>
+            <if test="selfcheckingrate != null" >
+                selfCheckingRate = #{selfcheckingrate,jdbcType=VARCHAR},
+            </if>
+            <if test="selfcheckingsrate != null" >
+                selfCheckingsRate = #{selfcheckingsrate,jdbcType=VARCHAR},
+            </if>
+            <if test="filerate != null" >
+                fileRate = #{filerate,jdbcType=VARCHAR},
+            </if>
+            <if test="raisingrates != null" >
+                raisingRates = #{raisingrates,jdbcType=VARCHAR},
+            </if>
+            <if test="afforestationrate != null" >
+                afforestationRate = #{afforestationrate,jdbcType=VARCHAR},
+            </if>
+            <if test="themanagementrate != null" >
+                theManagementRate = #{themanagementrate,jdbcType=VARCHAR},
+            </if>
+            <if test="mark != null" >
+                mark = #{mark,jdbcType=VARCHAR},
+            </if>
+            <if test="sfyda != null" >
+                SFYDA = #{sfyda,jdbcType=VARCHAR},
+            </if>
+            <if test="sffy != null" >
+                SFFY = #{sffy,jdbcType=VARCHAR},
+            </if>
+            <if test="sfgh != null" >
+                SFGH = #{sfgh,jdbcType=VARCHAR},
+            </if>
+            <if test="sfzj != null" >
+                SFZJ = #{sfzj,jdbcType=VARCHAR},
+            </if>
+            <if test="ylfs != null" >
+                YLFS = #{ylfs,jdbcType=VARCHAR},
+            </if>
+            <if test="clmj != null" >
+                CLMJ = #{clmj,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.yzl.pojo.YzlMonitoringstatistics" >
+        update yzl_monitoringstatistics
+        set did = #{did,jdbcType=BIGINT},
+            eid = #{eid,jdbcType=BIGINT},
+            tid = #{tid,jdbcType=VARCHAR},
+            time = #{time,jdbcType=VARCHAR},
+            inspectionReportArea = #{inspectionreportarea,jdbcType=VARCHAR},
+            verifyArea = #{verifyarea,jdbcType=VARCHAR},
+            certifiedArea = #{certifiedarea,jdbcType=VARCHAR},
+            jobDesignArea = #{jobdesignarea,jdbcType=VARCHAR},
+            designConstructionAccordingOperation = #{designconstructionaccordingoperation,jdbcType=VARCHAR},
+            fileSize = #{filesize,jdbcType=VARCHAR},
+            countyInspectionArea = #{countyinspectionarea,jdbcType=VARCHAR},
+            designForestArea = #{designforestarea,jdbcType=VARCHAR},
+            verifyForestArea = #{verifyforestarea,jdbcType=VARCHAR},
+            bareArea = #{barearea,jdbcType=VARCHAR},
+            managementArea = #{managementarea,jdbcType=VARCHAR},
+            areaVerificationRate = #{areaverificationrate,jdbcType=VARCHAR},
+            verifyAreaPassRate = #{verifyareapassrate,jdbcType=VARCHAR},
+            reportAreaQualificationRate = #{reportareaqualificationrate,jdbcType=VARCHAR},
+            reportRetentionRateYear = #{reportretentionrateyear,jdbcType=VARCHAR},
+            afforestationReportsEligibleYear = #{afforestationreportseligibleyear,jdbcType=VARCHAR},
+            countySelfInspectionArea = #{countyselfinspectionarea,jdbcType=VARCHAR},
+            calculatedVerificationArea = #{calculatedverificationarea,jdbcType=VARCHAR},
+            calculateQualifiedArea = #{calculatequalifiedarea,jdbcType=VARCHAR},
+            scheduledTask = #{scheduledtask,jdbcType=VARCHAR},
+            taskCompletionRate = #{taskcompletionrate,jdbcType=VARCHAR},
+            jobDesignRate = #{jobdesignrate,jdbcType=VARCHAR},
+            accordingDesignConstructionRate = #{accordingdesignconstructionrate,jdbcType=VARCHAR},
+            byInputtingRate = #{byinputtingrate,jdbcType=VARCHAR},
+            selfCheckingRate = #{selfcheckingrate,jdbcType=VARCHAR},
+            selfCheckingsRate = #{selfcheckingsrate,jdbcType=VARCHAR},
+            fileRate = #{filerate,jdbcType=VARCHAR},
+            raisingRates = #{raisingrates,jdbcType=VARCHAR},
+            afforestationRate = #{afforestationrate,jdbcType=VARCHAR},
+            theManagementRate = #{themanagementrate,jdbcType=VARCHAR},
+            mark = #{mark,jdbcType=VARCHAR},
+            SFYDA = #{sfyda,jdbcType=VARCHAR},
+            SFFY = #{sffy,jdbcType=VARCHAR},
+            SFGH = #{sfgh,jdbcType=VARCHAR},
+            SFZJ = #{sfzj,jdbcType=VARCHAR},
+            YLFS = #{ylfs,jdbcType=VARCHAR},
+            CLMJ = #{clmj,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    
+    <select id="select" resultType="com.yzl.pojo.YzlMonitoringstatistics">
+    	SELECT * FROM yzl_monitoringstatistics
+    </select>
+    
+    <!-- ////根据市的编号查询小班表中的拥有的县的编号 -->
+    <select id="selectByCityNumber" resultType="com.yzl.pojo.YzlXb">
+    	SELECT DISTINCT COUNTY FROM (SELECT * FROM yzl_xb WHERE city = #{anumber}) as xb
+    </select>
+    
+    <select id="selectCity" resultType="com.yzl.pojo.YzlXb">
+    	SELECT * FROM yzl_xb WHERE city = #{city}
+    </select>
+    
+    <select id="text" resultType="com.yzl.pojo.YzlXb">
+    	SELECT * FROM yzl_xb
+    </select>
+    
+    <resultMap type="com.yzl.pojo.YzlMenu" id="selectByMeun">
+    	<id column="menu_id" property="menuId"/>
+    </resultMap>
+    
+    <!-- 获取用户对应的权限 -->
+    <select id="selectByMeun" resultMap="selectByMeun">
+    	SELECT * FROM (
+		SELECT * FROM yzl_menu WHERE menu_id IN (
+		SELECT menu_id FROM yzl_role_menu WHERE role_id = (
+		SELECT role_id FROM yzl_user_role WHERE user_id = (
+		SELECT id FROM yzl_user WHERE id = #{id})))
+		) xb
+		WHERE pid = 9
+    </select>
+    
+    <select id="selectByMenuId" resultMap="selectByMeun">
+    	SELECT * FROM (
+		SELECT * FROM yzl_menu WHERE menu_id IN (
+		SELECT menu_id FROM yzl_role_menu WHERE role_id = (
+		SELECT role_id FROM yzl_user_role WHERE user_id = (
+		SELECT id FROM yzl_user WHERE id = #{id})))
+		) xb
+		WHERE pid = #{menuId}
+    </select>
+    
+    <select id="AllCity" resultType="com.yzl.pojo.YzlDistrict">
+    	select   DISTINCT cityCode ,city , flag from yzl_district 
+    </select>
+    <select id="AllGclb" resultType="com.yzl.pojo.YzlEpc">
+    	select ename,mark from yzl_epc 
+    </select>
+    <select id="AllCounty" resultType="com.yzl.pojo.YzlDistrict">
+    	SELECT Anumber , county FROM yzl_district WHERE flag = #{cityCode}
+    </select>
+</mapper>

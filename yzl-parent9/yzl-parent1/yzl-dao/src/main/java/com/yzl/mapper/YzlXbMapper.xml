@@ -1,0 +1,2488 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzl.mapper.YzlXbMapper" >
+
+    <resultMap id="BaseResultMap" type="com.yzl.pojo.YzlXb" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="BSM" property="bsm" jdbcType="VARCHAR" />
+        <result column="CITY" property="city" jdbcType="VARCHAR" />
+        <result column="COUNTY" property="county" jdbcType="VARCHAR" />
+        <result column="TOWN" property="town" jdbcType="VARCHAR" />
+        <result column="VILLAGE" property="village" jdbcType="VARCHAR" />
+        <result column="LIN_BAN" property="linBan" jdbcType="VARCHAR" />
+        <result column="JYING_BAN" property="jyingBan" jdbcType="VARCHAR" />
+        <result column="XIAO_BAN" property="xiaoBan" jdbcType="VARCHAR" />
+        <result column="ZY_XB" property="zyXb" jdbcType="VARCHAR" />
+        <result column="YDH" property="ydh" jdbcType="VARCHAR" />
+        <result column="TFH" property="tfh" jdbcType="VARCHAR" />
+        <result column="GCLB" property="gclb" jdbcType="VARCHAR" />
+        <result column="ZLLB" property="zllb" jdbcType="VARCHAR" />
+        <result column="JHND" property="jhnd" jdbcType="VARCHAR" />
+        <result column="ZYND" property="zynd" jdbcType="VARCHAR" />
+        <result column="ZLQ_DILEI" property="zlqDilei" jdbcType="VARCHAR" />
+        <result column="DILEI" property="dilei" jdbcType="VARCHAR" />
+        <result column="FYLX" property="fylx" jdbcType="VARCHAR" />
+        <result column="FYFS" property="fyfs" jdbcType="VARCHAR" />
+        <result column="LDQS" property="ldqs" jdbcType="VARCHAR" />
+        <result column="LMQS" property="lmqs" jdbcType="VARCHAR" />
+        <result column="LZ" property="lz" jdbcType="VARCHAR" />
+        <result column="SZ1" property="sz1" jdbcType="VARCHAR" />
+        <result column="SZ2" property="sz2" jdbcType="VARCHAR" />
+        <result column="BILI" property="bili" jdbcType="VARCHAR" />
+        <result column="ZBLX" property="zblx" jdbcType="VARCHAR" />
+        <result column="PO_DU" property="poDu" jdbcType="VARCHAR" />
+        <result column="XTJSBMJ" property="xtjsbmj" jdbcType="VARCHAR" />
+        <result column="CHL" property="chl" jdbcType="VARCHAR" />
+        <result column="CHL_DJ" property="chlDj" jdbcType="VARCHAR" />
+        <result column="YBD" property="ybd" jdbcType="VARCHAR" />
+        <result column="HSMJ" property="hsmj" jdbcType="VARCHAR" />
+        <result column="BHSMJ" property="bhsmj" jdbcType="VARCHAR" />
+        <result column="HGMJ" property="hgmj" jdbcType="VARCHAR" />
+        <result column="CLMJ" property="clmj" jdbcType="VARCHAR" />
+        <result column="DBZMJ" property="dbzmj" jdbcType="VARCHAR" />
+        <result column="BHGMJ" property="bhgmj" jdbcType="VARCHAR" />
+        <result column="SSMJ" property="ssmj" jdbcType="VARCHAR" />
+        <result column="BHSYY" property="bhsyy" jdbcType="VARCHAR" />
+        <result column="WCLYY" property="wclyy" jdbcType="VARCHAR" />
+        <result column="DBZYY" property="dbzyy" jdbcType="VARCHAR" />
+        <result column="BHGYY" property="bhgyy" jdbcType="VARCHAR" />
+        <result column="SSYY" property="ssyy" jdbcType="VARCHAR" />
+        <result column="SFSJ" property="sfsj" jdbcType="VARCHAR" />
+        <result column="SFSP" property="sfsp" jdbcType="VARCHAR" />
+        <result column="SJDWZZ" property="sjdwzz" jdbcType="VARCHAR" />
+        <result column="SFASJSS" property="sfasjss" jdbcType="VARCHAR" />
+        <result column="SFYDA" property="sfyda" jdbcType="VARCHAR" />
+        <result column="SFFY" property="sffy" jdbcType="VARCHAR" />
+        <result column="SFGH" property="sfgh" jdbcType="VARCHAR" />
+        <result column="SFZJ" property="sfzj" jdbcType="VARCHAR" />
+        <result column="SFYHT" property="sfyht" jdbcType="VARCHAR" />
+        <result column="SFYLQZ" property="sfylqz" jdbcType="VARCHAR" />
+        <result column="YLFS" property="ylfs" jdbcType="VARCHAR" />
+        <result column="SJYLMJ" property="sjylmj" jdbcType="VARCHAR" />
+        <result column="HSYLMJ" property="hsylmj" jdbcType="VARCHAR" />
+        <result column="ZLZTLX" property="zlztlx" jdbcType="VARCHAR" />
+        <result column="BZ1" property="bz1" jdbcType="VARCHAR" />
+        <result column="BZ2" property="bz2" jdbcType="VARCHAR" />
+        <result column="BZ3" property="bz3" jdbcType="VARCHAR" />
+        <result column="HCRY" property="hcry" jdbcType="VARCHAR" />
+        <result column="HCRQ" property="hcrq" jdbcType="VARCHAR" />
+        <result column="PHOTO" property="photo" jdbcType="VARCHAR" />
+        <result column="stat" property="stat" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, BSM, CITY, COUNTY, TOWN, VILLAGE, LIN_BAN, JYING_BAN, XIAO_BAN, ZY_XB, YDH, TFH, 
+        GCLB, ZLLB, JHND, ZYND, ZLQ_DILEI, DILEI, FYLX, FYFS, LDQS, LMQS, LZ, SZ1, SZ2, BILI, 
+        ZBLX, PO_DU, XTJSBMJ, CHL, CHL_DJ, YBD, HSMJ, BHSMJ, HGMJ, CLMJ, DBZMJ, BHGMJ, SSMJ, 
+        BHSYY, WCLYY, DBZYY, BHGYY, SSYY, SFSJ, SFSP, SJDWZZ, SFASJSS, SFYDA, SFFY, SFGH, 
+        SFZJ, SFYHT, SFYLQZ, YLFS, SJYLMJ, HSYLMJ, ZLZTLX, BZ1, BZ2, BZ3, HCRY, HCRQ, PHOTO, 
+        stat
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yzl.pojo.YzlXbExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from yzl_xb
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from yzl_xb
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from yzl_xb
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.yzl.pojo.YzlXbExample" >
+        delete from yzl_xb
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.yzl.pojo.YzlXb" >
+        insert into yzl_xb (id, BSM, CITY, 
+            COUNTY, TOWN, VILLAGE, 
+            LIN_BAN, JYING_BAN, XIAO_BAN, 
+            ZY_XB, YDH, TFH, GCLB, 
+            ZLLB, JHND, ZYND, 
+            ZLQ_DILEI, DILEI, FYLX, 
+            FYFS, LDQS, LMQS, 
+            LZ, SZ1, SZ2, BILI, 
+            ZBLX, PO_DU, XTJSBMJ, 
+            CHL, CHL_DJ, YBD, 
+            HSMJ, BHSMJ, HGMJ, 
+            CLMJ, DBZMJ, BHGMJ, 
+            SSMJ, BHSYY, WCLYY, 
+            DBZYY, BHGYY, SSYY, 
+            SFSJ, SFSP, SJDWZZ, 
+            SFASJSS, SFYDA, SFFY, 
+            SFGH, SFZJ, SFYHT, 
+            SFYLQZ, YLFS, SJYLMJ, 
+            HSYLMJ, ZLZTLX, BZ1, 
+            BZ2, BZ3, HCRY, HCRQ, 
+            PHOTO, stat)
+        values (#{id,jdbcType=INTEGER}, #{bsm,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+            #{county,jdbcType=VARCHAR}, #{town,jdbcType=VARCHAR}, #{village,jdbcType=VARCHAR}, 
+            #{linBan,jdbcType=VARCHAR}, #{jyingBan,jdbcType=VARCHAR}, #{xiaoBan,jdbcType=VARCHAR}, 
+            #{zyXb,jdbcType=VARCHAR}, #{ydh,jdbcType=VARCHAR}, #{tfh,jdbcType=VARCHAR}, #{gclb,jdbcType=VARCHAR}, 
+            #{zllb,jdbcType=VARCHAR}, #{jhnd,jdbcType=VARCHAR}, #{zynd,jdbcType=VARCHAR}, 
+            #{zlqDilei,jdbcType=VARCHAR}, #{dilei,jdbcType=VARCHAR}, #{fylx,jdbcType=VARCHAR}, 
+            #{fyfs,jdbcType=VARCHAR}, #{ldqs,jdbcType=VARCHAR}, #{lmqs,jdbcType=VARCHAR}, 
+            #{lz,jdbcType=VARCHAR}, #{sz1,jdbcType=VARCHAR}, #{sz2,jdbcType=VARCHAR}, #{bili,jdbcType=VARCHAR}, 
+            #{zblx,jdbcType=VARCHAR}, #{poDu,jdbcType=VARCHAR}, #{xtjsbmj,jdbcType=VARCHAR}, 
+            #{chl,jdbcType=VARCHAR}, #{chlDj,jdbcType=VARCHAR}, #{ybd,jdbcType=VARCHAR}, 
+            #{hsmj,jdbcType=VARCHAR}, #{bhsmj,jdbcType=VARCHAR}, #{hgmj,jdbcType=VARCHAR}, 
+            #{clmj,jdbcType=VARCHAR}, #{dbzmj,jdbcType=VARCHAR}, #{bhgmj,jdbcType=VARCHAR}, 
+            #{ssmj,jdbcType=VARCHAR}, #{bhsyy,jdbcType=VARCHAR}, #{wclyy,jdbcType=VARCHAR}, 
+            #{dbzyy,jdbcType=VARCHAR}, #{bhgyy,jdbcType=VARCHAR}, #{ssyy,jdbcType=VARCHAR}, 
+            #{sfsj,jdbcType=VARCHAR}, #{sfsp,jdbcType=VARCHAR}, #{sjdwzz,jdbcType=VARCHAR}, 
+            #{sfasjss,jdbcType=VARCHAR}, #{sfyda,jdbcType=VARCHAR}, #{sffy,jdbcType=VARCHAR}, 
+            #{sfgh,jdbcType=VARCHAR}, #{sfzj,jdbcType=VARCHAR}, #{sfyht,jdbcType=VARCHAR}, 
+            #{sfylqz,jdbcType=VARCHAR}, #{ylfs,jdbcType=VARCHAR}, #{sjylmj,jdbcType=VARCHAR}, 
+            #{hsylmj,jdbcType=VARCHAR}, #{zlztlx,jdbcType=VARCHAR}, #{bz1,jdbcType=VARCHAR}, 
+            #{bz2,jdbcType=VARCHAR}, #{bz3,jdbcType=VARCHAR}, #{hcry,jdbcType=VARCHAR}, #{hcrq,jdbcType=VARCHAR}, 
+            #{photo,jdbcType=VARCHAR}, #{stat,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.yzl.pojo.YzlXb" >
+        insert into yzl_xb
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="bsm != null" >
+                BSM,
+            </if>
+            <if test="city != null" >
+                CITY,
+            </if>
+            <if test="county != null" >
+                COUNTY,
+            </if>
+            <if test="town != null" >
+                TOWN,
+            </if>
+            <if test="village != null" >
+                VILLAGE,
+            </if>
+            <if test="linBan != null" >
+                LIN_BAN,
+            </if>
+            <if test="jyingBan != null" >
+                JYING_BAN,
+            </if>
+            <if test="xiaoBan != null" >
+                XIAO_BAN,
+            </if>
+            <if test="zyXb != null" >
+                ZY_XB,
+            </if>
+            <if test="ydh != null" >
+                YDH,
+            </if>
+            <if test="tfh != null" >
+                TFH,
+            </if>
+            <if test="gclb != null" >
+                GCLB,
+            </if>
+            <if test="zllb != null" >
+                ZLLB,
+            </if>
+            <if test="jhnd != null" >
+                JHND,
+            </if>
+            <if test="zynd != null" >
+                ZYND,
+            </if>
+            <if test="zlqDilei != null" >
+                ZLQ_DILEI,
+            </if>
+            <if test="dilei != null" >
+                DILEI,
+            </if>
+            <if test="fylx != null" >
+                FYLX,
+            </if>
+            <if test="fyfs != null" >
+                FYFS,
+            </if>
+            <if test="ldqs != null" >
+                LDQS,
+            </if>
+            <if test="lmqs != null" >
+                LMQS,
+            </if>
+            <if test="lz != null" >
+                LZ,
+            </if>
+            <if test="sz1 != null" >
+                SZ1,
+            </if>
+            <if test="sz2 != null" >
+                SZ2,
+            </if>
+            <if test="bili != null" >
+                BILI,
+            </if>
+            <if test="zblx != null" >
+                ZBLX,
+            </if>
+            <if test="poDu != null" >
+                PO_DU,
+            </if>
+            <if test="xtjsbmj != null" >
+                XTJSBMJ,
+            </if>
+            <if test="chl != null" >
+                CHL,
+            </if>
+            <if test="chlDj != null" >
+                CHL_DJ,
+            </if>
+            <if test="ybd != null" >
+                YBD,
+            </if>
+            <if test="hsmj != null" >
+                HSMJ,
+            </if>
+            <if test="bhsmj != null" >
+                BHSMJ,
+            </if>
+            <if test="hgmj != null" >
+                HGMJ,
+            </if>
+            <if test="clmj != null" >
+                CLMJ,
+            </if>
+            <if test="dbzmj != null" >
+                DBZMJ,
+            </if>
+            <if test="bhgmj != null" >
+                BHGMJ,
+            </if>
+            <if test="ssmj != null" >
+                SSMJ,
+            </if>
+            <if test="bhsyy != null" >
+                BHSYY,
+            </if>
+            <if test="wclyy != null" >
+                WCLYY,
+            </if>
+            <if test="dbzyy != null" >
+                DBZYY,
+            </if>
+            <if test="bhgyy != null" >
+                BHGYY,
+            </if>
+            <if test="ssyy != null" >
+                SSYY,
+            </if>
+            <if test="sfsj != null" >
+                SFSJ,
+            </if>
+            <if test="sfsp != null" >
+                SFSP,
+            </if>
+            <if test="sjdwzz != null" >
+                SJDWZZ,
+            </if>
+            <if test="sfasjss != null" >
+                SFASJSS,
+            </if>
+            <if test="sfyda != null" >
+                SFYDA,
+            </if>
+            <if test="sffy != null" >
+                SFFY,
+            </if>
+            <if test="sfgh != null" >
+                SFGH,
+            </if>
+            <if test="sfzj != null" >
+                SFZJ,
+            </if>
+            <if test="sfyht != null" >
+                SFYHT,
+            </if>
+            <if test="sfylqz != null" >
+                SFYLQZ,
+            </if>
+            <if test="ylfs != null" >
+                YLFS,
+            </if>
+            <if test="sjylmj != null" >
+                SJYLMJ,
+            </if>
+            <if test="hsylmj != null" >
+                HSYLMJ,
+            </if>
+            <if test="zlztlx != null" >
+                ZLZTLX,
+            </if>
+            <if test="bz1 != null" >
+                BZ1,
+            </if>
+            <if test="bz2 != null" >
+                BZ2,
+            </if>
+            <if test="bz3 != null" >
+                BZ3,
+            </if>
+            <if test="hcry != null" >
+                HCRY,
+            </if>
+            <if test="hcrq != null" >
+                HCRQ,
+            </if>
+            <if test="photo != null" >
+                PHOTO,
+            </if>
+            <if test="stat != null" >
+                stat,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="bsm != null" >
+                #{bsm,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="county != null" >
+                #{county,jdbcType=VARCHAR},
+            </if>
+            <if test="town != null" >
+                #{town,jdbcType=VARCHAR},
+            </if>
+            <if test="village != null" >
+                #{village,jdbcType=VARCHAR},
+            </if>
+            <if test="linBan != null" >
+                #{linBan,jdbcType=VARCHAR},
+            </if>
+            <if test="jyingBan != null" >
+                #{jyingBan,jdbcType=VARCHAR},
+            </if>
+            <if test="xiaoBan != null" >
+                #{xiaoBan,jdbcType=VARCHAR},
+            </if>
+            <if test="zyXb != null" >
+                #{zyXb,jdbcType=VARCHAR},
+            </if>
+            <if test="ydh != null" >
+                #{ydh,jdbcType=VARCHAR},
+            </if>
+            <if test="tfh != null" >
+                #{tfh,jdbcType=VARCHAR},
+            </if>
+            <if test="gclb != null" >
+                #{gclb,jdbcType=VARCHAR},
+            </if>
+            <if test="zllb != null" >
+                #{zllb,jdbcType=VARCHAR},
+            </if>
+            <if test="jhnd != null" >
+                #{jhnd,jdbcType=VARCHAR},
+            </if>
+            <if test="zynd != null" >
+                #{zynd,jdbcType=VARCHAR},
+            </if>
+            <if test="zlqDilei != null" >
+                #{zlqDilei,jdbcType=VARCHAR},
+            </if>
+            <if test="dilei != null" >
+                #{dilei,jdbcType=VARCHAR},
+            </if>
+            <if test="fylx != null" >
+                #{fylx,jdbcType=VARCHAR},
+            </if>
+            <if test="fyfs != null" >
+                #{fyfs,jdbcType=VARCHAR},
+            </if>
+            <if test="ldqs != null" >
+                #{ldqs,jdbcType=VARCHAR},
+            </if>
+            <if test="lmqs != null" >
+                #{lmqs,jdbcType=VARCHAR},
+            </if>
+            <if test="lz != null" >
+                #{lz,jdbcType=VARCHAR},
+            </if>
+            <if test="sz1 != null" >
+                #{sz1,jdbcType=VARCHAR},
+            </if>
+            <if test="sz2 != null" >
+                #{sz2,jdbcType=VARCHAR},
+            </if>
+            <if test="bili != null" >
+                #{bili,jdbcType=VARCHAR},
+            </if>
+            <if test="zblx != null" >
+                #{zblx,jdbcType=VARCHAR},
+            </if>
+            <if test="poDu != null" >
+                #{poDu,jdbcType=VARCHAR},
+            </if>
+            <if test="xtjsbmj != null" >
+                #{xtjsbmj,jdbcType=VARCHAR},
+            </if>
+            <if test="chl != null" >
+                #{chl,jdbcType=VARCHAR},
+            </if>
+            <if test="chlDj != null" >
+                #{chlDj,jdbcType=VARCHAR},
+            </if>
+            <if test="ybd != null" >
+                #{ybd,jdbcType=VARCHAR},
+            </if>
+            <if test="hsmj != null" >
+                #{hsmj,jdbcType=VARCHAR},
+            </if>
+            <if test="bhsmj != null" >
+                #{bhsmj,jdbcType=VARCHAR},
+            </if>
+            <if test="hgmj != null" >
+                #{hgmj,jdbcType=VARCHAR},
+            </if>
+            <if test="clmj != null" >
+                #{clmj,jdbcType=VARCHAR},
+            </if>
+            <if test="dbzmj != null" >
+                #{dbzmj,jdbcType=VARCHAR},
+            </if>
+            <if test="bhgmj != null" >
+                #{bhgmj,jdbcType=VARCHAR},
+            </if>
+            <if test="ssmj != null" >
+                #{ssmj,jdbcType=VARCHAR},
+            </if>
+            <if test="bhsyy != null" >
+                #{bhsyy,jdbcType=VARCHAR},
+            </if>
+            <if test="wclyy != null" >
+                #{wclyy,jdbcType=VARCHAR},
+            </if>
+            <if test="dbzyy != null" >
+                #{dbzyy,jdbcType=VARCHAR},
+            </if>
+            <if test="bhgyy != null" >
+                #{bhgyy,jdbcType=VARCHAR},
+            </if>
+            <if test="ssyy != null" >
+                #{ssyy,jdbcType=VARCHAR},
+            </if>
+            <if test="sfsj != null" >
+                #{sfsj,jdbcType=VARCHAR},
+            </if>
+            <if test="sfsp != null" >
+                #{sfsp,jdbcType=VARCHAR},
+            </if>
+            <if test="sjdwzz != null" >
+                #{sjdwzz,jdbcType=VARCHAR},
+            </if>
+            <if test="sfasjss != null" >
+                #{sfasjss,jdbcType=VARCHAR},
+            </if>
+            <if test="sfyda != null" >
+                #{sfyda,jdbcType=VARCHAR},
+            </if>
+            <if test="sffy != null" >
+                #{sffy,jdbcType=VARCHAR},
+            </if>
+            <if test="sfgh != null" >
+                #{sfgh,jdbcType=VARCHAR},
+            </if>
+            <if test="sfzj != null" >
+                #{sfzj,jdbcType=VARCHAR},
+            </if>
+            <if test="sfyht != null" >
+                #{sfyht,jdbcType=VARCHAR},
+            </if>
+            <if test="sfylqz != null" >
+                #{sfylqz,jdbcType=VARCHAR},
+            </if>
+            <if test="ylfs != null" >
+                #{ylfs,jdbcType=VARCHAR},
+            </if>
+            <if test="sjylmj != null" >
+                #{sjylmj,jdbcType=VARCHAR},
+            </if>
+            <if test="hsylmj != null" >
+                #{hsylmj,jdbcType=VARCHAR},
+            </if>
+            <if test="zlztlx != null" >
+                #{zlztlx,jdbcType=VARCHAR},
+            </if>
+            <if test="bz1 != null" >
+                #{bz1,jdbcType=VARCHAR},
+            </if>
+            <if test="bz2 != null" >
+                #{bz2,jdbcType=VARCHAR},
+            </if>
+            <if test="bz3 != null" >
+                #{bz3,jdbcType=VARCHAR},
+            </if>
+            <if test="hcry != null" >
+                #{hcry,jdbcType=VARCHAR},
+            </if>
+            <if test="hcrq != null" >
+                #{hcrq,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null" >
+                #{photo,jdbcType=VARCHAR},
+            </if>
+            <if test="stat != null" >
+                #{stat,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.yzl.pojo.YzlXbExample" resultType="java.lang.Integer" >
+        select count(*) from yzl_xb
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update yzl_xb
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.bsm != null" >
+                BSM = #{record.bsm,jdbcType=VARCHAR},
+            </if>
+            <if test="record.city != null" >
+                CITY = #{record.city,jdbcType=VARCHAR},
+            </if>
+            <if test="record.county != null" >
+                COUNTY = #{record.county,jdbcType=VARCHAR},
+            </if>
+            <if test="record.town != null" >
+                TOWN = #{record.town,jdbcType=VARCHAR},
+            </if>
+            <if test="record.village != null" >
+                VILLAGE = #{record.village,jdbcType=VARCHAR},
+            </if>
+            <if test="record.linBan != null" >
+                LIN_BAN = #{record.linBan,jdbcType=VARCHAR},
+            </if>
+            <if test="record.jyingBan != null" >
+                JYING_BAN = #{record.jyingBan,jdbcType=VARCHAR},
+            </if>
+            <if test="record.xiaoBan != null" >
+                XIAO_BAN = #{record.xiaoBan,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zyXb != null" >
+                ZY_XB = #{record.zyXb,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ydh != null" >
+                YDH = #{record.ydh,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tfh != null" >
+                TFH = #{record.tfh,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gclb != null" >
+                GCLB = #{record.gclb,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zllb != null" >
+                ZLLB = #{record.zllb,jdbcType=VARCHAR},
+            </if>
+            <if test="record.jhnd != null" >
+                JHND = #{record.jhnd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zynd != null" >
+                ZYND = #{record.zynd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zlqDilei != null" >
+                ZLQ_DILEI = #{record.zlqDilei,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dilei != null" >
+                DILEI = #{record.dilei,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fylx != null" >
+                FYLX = #{record.fylx,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fyfs != null" >
+                FYFS = #{record.fyfs,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ldqs != null" >
+                LDQS = #{record.ldqs,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lmqs != null" >
+                LMQS = #{record.lmqs,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lz != null" >
+                LZ = #{record.lz,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sz1 != null" >
+                SZ1 = #{record.sz1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sz2 != null" >
+                SZ2 = #{record.sz2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bili != null" >
+                BILI = #{record.bili,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zblx != null" >
+                ZBLX = #{record.zblx,jdbcType=VARCHAR},
+            </if>
+            <if test="record.poDu != null" >
+                PO_DU = #{record.poDu,jdbcType=VARCHAR},
+            </if>
+            <if test="record.xtjsbmj != null" >
+                XTJSBMJ = #{record.xtjsbmj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.chl != null" >
+                CHL = #{record.chl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.chlDj != null" >
+                CHL_DJ = #{record.chlDj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ybd != null" >
+                YBD = #{record.ybd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hsmj != null" >
+                HSMJ = #{record.hsmj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bhsmj != null" >
+                BHSMJ = #{record.bhsmj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hgmj != null" >
+                HGMJ = #{record.hgmj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.clmj != null" >
+                CLMJ = #{record.clmj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dbzmj != null" >
+                DBZMJ = #{record.dbzmj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bhgmj != null" >
+                BHGMJ = #{record.bhgmj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ssmj != null" >
+                SSMJ = #{record.ssmj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bhsyy != null" >
+                BHSYY = #{record.bhsyy,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wclyy != null" >
+                WCLYY = #{record.wclyy,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dbzyy != null" >
+                DBZYY = #{record.dbzyy,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bhgyy != null" >
+                BHGYY = #{record.bhgyy,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ssyy != null" >
+                SSYY = #{record.ssyy,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfsj != null" >
+                SFSJ = #{record.sfsj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfsp != null" >
+                SFSP = #{record.sfsp,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sjdwzz != null" >
+                SJDWZZ = #{record.sjdwzz,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfasjss != null" >
+                SFASJSS = #{record.sfasjss,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfyda != null" >
+                SFYDA = #{record.sfyda,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sffy != null" >
+                SFFY = #{record.sffy,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfgh != null" >
+                SFGH = #{record.sfgh,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfzj != null" >
+                SFZJ = #{record.sfzj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfyht != null" >
+                SFYHT = #{record.sfyht,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfylqz != null" >
+                SFYLQZ = #{record.sfylqz,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ylfs != null" >
+                YLFS = #{record.ylfs,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sjylmj != null" >
+                SJYLMJ = #{record.sjylmj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hsylmj != null" >
+                HSYLMJ = #{record.hsylmj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zlztlx != null" >
+                ZLZTLX = #{record.zlztlx,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bz1 != null" >
+                BZ1 = #{record.bz1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bz2 != null" >
+                BZ2 = #{record.bz2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bz3 != null" >
+                BZ3 = #{record.bz3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hcry != null" >
+                HCRY = #{record.hcry,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hcrq != null" >
+                HCRQ = #{record.hcrq,jdbcType=VARCHAR},
+            </if>
+            <if test="record.photo != null" >
+                PHOTO = #{record.photo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.stat != null" >
+                stat = #{record.stat,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update yzl_xb
+        set id = #{record.id,jdbcType=INTEGER},
+            BSM = #{record.bsm,jdbcType=VARCHAR},
+            CITY = #{record.city,jdbcType=VARCHAR},
+            COUNTY = #{record.county,jdbcType=VARCHAR},
+            TOWN = #{record.town,jdbcType=VARCHAR},
+            VILLAGE = #{record.village,jdbcType=VARCHAR},
+            LIN_BAN = #{record.linBan,jdbcType=VARCHAR},
+            JYING_BAN = #{record.jyingBan,jdbcType=VARCHAR},
+            XIAO_BAN = #{record.xiaoBan,jdbcType=VARCHAR},
+            ZY_XB = #{record.zyXb,jdbcType=VARCHAR},
+            YDH = #{record.ydh,jdbcType=VARCHAR},
+            TFH = #{record.tfh,jdbcType=VARCHAR},
+            GCLB = #{record.gclb,jdbcType=VARCHAR},
+            ZLLB = #{record.zllb,jdbcType=VARCHAR},
+            JHND = #{record.jhnd,jdbcType=VARCHAR},
+            ZYND = #{record.zynd,jdbcType=VARCHAR},
+            ZLQ_DILEI = #{record.zlqDilei,jdbcType=VARCHAR},
+            DILEI = #{record.dilei,jdbcType=VARCHAR},
+            FYLX = #{record.fylx,jdbcType=VARCHAR},
+            FYFS = #{record.fyfs,jdbcType=VARCHAR},
+            LDQS = #{record.ldqs,jdbcType=VARCHAR},
+            LMQS = #{record.lmqs,jdbcType=VARCHAR},
+            LZ = #{record.lz,jdbcType=VARCHAR},
+            SZ1 = #{record.sz1,jdbcType=VARCHAR},
+            SZ2 = #{record.sz2,jdbcType=VARCHAR},
+            BILI = #{record.bili,jdbcType=VARCHAR},
+            ZBLX = #{record.zblx,jdbcType=VARCHAR},
+            PO_DU = #{record.poDu,jdbcType=VARCHAR},
+            XTJSBMJ = #{record.xtjsbmj,jdbcType=VARCHAR},
+            CHL = #{record.chl,jdbcType=VARCHAR},
+            CHL_DJ = #{record.chlDj,jdbcType=VARCHAR},
+            YBD = #{record.ybd,jdbcType=VARCHAR},
+            HSMJ = #{record.hsmj,jdbcType=VARCHAR},
+            BHSMJ = #{record.bhsmj,jdbcType=VARCHAR},
+            HGMJ = #{record.hgmj,jdbcType=VARCHAR},
+            CLMJ = #{record.clmj,jdbcType=VARCHAR},
+            DBZMJ = #{record.dbzmj,jdbcType=VARCHAR},
+            BHGMJ = #{record.bhgmj,jdbcType=VARCHAR},
+            SSMJ = #{record.ssmj,jdbcType=VARCHAR},
+            BHSYY = #{record.bhsyy,jdbcType=VARCHAR},
+            WCLYY = #{record.wclyy,jdbcType=VARCHAR},
+            DBZYY = #{record.dbzyy,jdbcType=VARCHAR},
+            BHGYY = #{record.bhgyy,jdbcType=VARCHAR},
+            SSYY = #{record.ssyy,jdbcType=VARCHAR},
+            SFSJ = #{record.sfsj,jdbcType=VARCHAR},
+            SFSP = #{record.sfsp,jdbcType=VARCHAR},
+            SJDWZZ = #{record.sjdwzz,jdbcType=VARCHAR},
+            SFASJSS = #{record.sfasjss,jdbcType=VARCHAR},
+            SFYDA = #{record.sfyda,jdbcType=VARCHAR},
+            SFFY = #{record.sffy,jdbcType=VARCHAR},
+            SFGH = #{record.sfgh,jdbcType=VARCHAR},
+            SFZJ = #{record.sfzj,jdbcType=VARCHAR},
+            SFYHT = #{record.sfyht,jdbcType=VARCHAR},
+            SFYLQZ = #{record.sfylqz,jdbcType=VARCHAR},
+            YLFS = #{record.ylfs,jdbcType=VARCHAR},
+            SJYLMJ = #{record.sjylmj,jdbcType=VARCHAR},
+            HSYLMJ = #{record.hsylmj,jdbcType=VARCHAR},
+            ZLZTLX = #{record.zlztlx,jdbcType=VARCHAR},
+            BZ1 = #{record.bz1,jdbcType=VARCHAR},
+            BZ2 = #{record.bz2,jdbcType=VARCHAR},
+            BZ3 = #{record.bz3,jdbcType=VARCHAR},
+            HCRY = #{record.hcry,jdbcType=VARCHAR},
+            HCRQ = #{record.hcrq,jdbcType=VARCHAR},
+            PHOTO = #{record.photo,jdbcType=VARCHAR},
+            stat = #{record.stat,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.yzl.pojo.YzlXb" >
+        update yzl_xb
+        <set >
+            <if test="bsm != null" >
+                BSM = #{bsm,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                CITY = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="county != null" >
+                COUNTY = #{county,jdbcType=VARCHAR},
+            </if>
+            <if test="town != null" >
+                TOWN = #{town,jdbcType=VARCHAR},
+            </if>
+            <if test="village != null" >
+                VILLAGE = #{village,jdbcType=VARCHAR},
+            </if>
+            <if test="linBan != null" >
+                LIN_BAN = #{linBan,jdbcType=VARCHAR},
+            </if>
+            <if test="jyingBan != null" >
+                JYING_BAN = #{jyingBan,jdbcType=VARCHAR},
+            </if>
+            <if test="xiaoBan != null" >
+                XIAO_BAN = #{xiaoBan,jdbcType=VARCHAR},
+            </if>
+            <if test="zyXb != null" >
+                ZY_XB = #{zyXb,jdbcType=VARCHAR},
+            </if>
+            <if test="ydh != null" >
+                YDH = #{ydh,jdbcType=VARCHAR},
+            </if>
+            <if test="tfh != null" >
+                TFH = #{tfh,jdbcType=VARCHAR},
+            </if>
+            <if test="gclb != null" >
+                GCLB = #{gclb,jdbcType=VARCHAR},
+            </if>
+            <if test="zllb != null" >
+                ZLLB = #{zllb,jdbcType=VARCHAR},
+            </if>
+            <if test="jhnd != null" >
+                JHND = #{jhnd,jdbcType=VARCHAR},
+            </if>
+            <if test="zynd != null" >
+                ZYND = #{zynd,jdbcType=VARCHAR},
+            </if>
+            <if test="zlqDilei != null" >
+                ZLQ_DILEI = #{zlqDilei,jdbcType=VARCHAR},
+            </if>
+            <if test="dilei != null" >
+                DILEI = #{dilei,jdbcType=VARCHAR},
+            </if>
+            <if test="fylx != null" >
+                FYLX = #{fylx,jdbcType=VARCHAR},
+            </if>
+            <if test="fyfs != null" >
+                FYFS = #{fyfs,jdbcType=VARCHAR},
+            </if>
+            <if test="ldqs != null" >
+                LDQS = #{ldqs,jdbcType=VARCHAR},
+            </if>
+            <if test="lmqs != null" >
+                LMQS = #{lmqs,jdbcType=VARCHAR},
+            </if>
+            <if test="lz != null" >
+                LZ = #{lz,jdbcType=VARCHAR},
+            </if>
+            <if test="sz1 != null" >
+                SZ1 = #{sz1,jdbcType=VARCHAR},
+            </if>
+            <if test="sz2 != null" >
+                SZ2 = #{sz2,jdbcType=VARCHAR},
+            </if>
+            <if test="bili != null" >
+                BILI = #{bili,jdbcType=VARCHAR},
+            </if>
+            <if test="zblx != null" >
+                ZBLX = #{zblx,jdbcType=VARCHAR},
+            </if>
+            <if test="poDu != null" >
+                PO_DU = #{poDu,jdbcType=VARCHAR},
+            </if>
+            <if test="xtjsbmj != null" >
+                XTJSBMJ = #{xtjsbmj,jdbcType=VARCHAR},
+            </if>
+            <if test="chl != null" >
+                CHL = #{chl,jdbcType=VARCHAR},
+            </if>
+            <if test="chlDj != null" >
+                CHL_DJ = #{chlDj,jdbcType=VARCHAR},
+            </if>
+            <if test="ybd != null" >
+                YBD = #{ybd,jdbcType=VARCHAR},
+            </if>
+            <if test="hsmj != null" >
+                HSMJ = #{hsmj,jdbcType=VARCHAR},
+            </if>
+            <if test="bhsmj != null" >
+                BHSMJ = #{bhsmj,jdbcType=VARCHAR},
+            </if>
+            <if test="hgmj != null" >
+                HGMJ = #{hgmj,jdbcType=VARCHAR},
+            </if>
+            <if test="clmj != null" >
+                CLMJ = #{clmj,jdbcType=VARCHAR},
+            </if>
+            <if test="dbzmj != null" >
+                DBZMJ = #{dbzmj,jdbcType=VARCHAR},
+            </if>
+            <if test="bhgmj != null" >
+                BHGMJ = #{bhgmj,jdbcType=VARCHAR},
+            </if>
+            <if test="ssmj != null" >
+                SSMJ = #{ssmj,jdbcType=VARCHAR},
+            </if>
+            <if test="bhsyy != null" >
+                BHSYY = #{bhsyy,jdbcType=VARCHAR},
+            </if>
+            <if test="wclyy != null" >
+                WCLYY = #{wclyy,jdbcType=VARCHAR},
+            </if>
+            <if test="dbzyy != null" >
+                DBZYY = #{dbzyy,jdbcType=VARCHAR},
+            </if>
+            <if test="bhgyy != null" >
+                BHGYY = #{bhgyy,jdbcType=VARCHAR},
+            </if>
+            <if test="ssyy != null" >
+                SSYY = #{ssyy,jdbcType=VARCHAR},
+            </if>
+            <if test="sfsj != null" >
+                SFSJ = #{sfsj,jdbcType=VARCHAR},
+            </if>
+            <if test="sfsp != null" >
+                SFSP = #{sfsp,jdbcType=VARCHAR},
+            </if>
+            <if test="sjdwzz != null" >
+                SJDWZZ = #{sjdwzz,jdbcType=VARCHAR},
+            </if>
+            <if test="sfasjss != null" >
+                SFASJSS = #{sfasjss,jdbcType=VARCHAR},
+            </if>
+            <if test="sfyda != null" >
+                SFYDA = #{sfyda,jdbcType=VARCHAR},
+            </if>
+            <if test="sffy != null" >
+                SFFY = #{sffy,jdbcType=VARCHAR},
+            </if>
+            <if test="sfgh != null" >
+                SFGH = #{sfgh,jdbcType=VARCHAR},
+            </if>
+            <if test="sfzj != null" >
+                SFZJ = #{sfzj,jdbcType=VARCHAR},
+            </if>
+            <if test="sfyht != null" >
+                SFYHT = #{sfyht,jdbcType=VARCHAR},
+            </if>
+            <if test="sfylqz != null" >
+                SFYLQZ = #{sfylqz,jdbcType=VARCHAR},
+            </if>
+            <if test="ylfs != null" >
+                YLFS = #{ylfs,jdbcType=VARCHAR},
+            </if>
+            <if test="sjylmj != null" >
+                SJYLMJ = #{sjylmj,jdbcType=VARCHAR},
+            </if>
+            <if test="hsylmj != null" >
+                HSYLMJ = #{hsylmj,jdbcType=VARCHAR},
+            </if>
+            <if test="zlztlx != null" >
+                ZLZTLX = #{zlztlx,jdbcType=VARCHAR},
+            </if>
+            <if test="bz1 != null" >
+                BZ1 = #{bz1,jdbcType=VARCHAR},
+            </if>
+            <if test="bz2 != null" >
+                BZ2 = #{bz2,jdbcType=VARCHAR},
+            </if>
+            <if test="bz3 != null" >
+                BZ3 = #{bz3,jdbcType=VARCHAR},
+            </if>
+            <if test="hcry != null" >
+                HCRY = #{hcry,jdbcType=VARCHAR},
+            </if>
+            <if test="hcrq != null" >
+                HCRQ = #{hcrq,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null" >
+                PHOTO = #{photo,jdbcType=VARCHAR},
+            </if>
+            <if test="stat != null" >
+                stat = #{stat,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.yzl.pojo.YzlXb" >
+        update yzl_xb
+        set BSM = #{bsm,jdbcType=VARCHAR},
+            CITY = #{city,jdbcType=VARCHAR},
+            COUNTY = #{county,jdbcType=VARCHAR},
+            TOWN = #{town,jdbcType=VARCHAR},
+            VILLAGE = #{village,jdbcType=VARCHAR},
+            LIN_BAN = #{linBan,jdbcType=VARCHAR},
+            JYING_BAN = #{jyingBan,jdbcType=VARCHAR},
+            XIAO_BAN = #{xiaoBan,jdbcType=VARCHAR},
+            ZY_XB = #{zyXb,jdbcType=VARCHAR},
+            YDH = #{ydh,jdbcType=VARCHAR},
+            TFH = #{tfh,jdbcType=VARCHAR},
+            GCLB = #{gclb,jdbcType=VARCHAR},
+            ZLLB = #{zllb,jdbcType=VARCHAR},
+            JHND = #{jhnd,jdbcType=VARCHAR},
+            ZYND = #{zynd,jdbcType=VARCHAR},
+            ZLQ_DILEI = #{zlqDilei,jdbcType=VARCHAR},
+            DILEI = #{dilei,jdbcType=VARCHAR},
+            FYLX = #{fylx,jdbcType=VARCHAR},
+            FYFS = #{fyfs,jdbcType=VARCHAR},
+            LDQS = #{ldqs,jdbcType=VARCHAR},
+            LMQS = #{lmqs,jdbcType=VARCHAR},
+            LZ = #{lz,jdbcType=VARCHAR},
+            SZ1 = #{sz1,jdbcType=VARCHAR},
+            SZ2 = #{sz2,jdbcType=VARCHAR},
+            BILI = #{bili,jdbcType=VARCHAR},
+            ZBLX = #{zblx,jdbcType=VARCHAR},
+            PO_DU = #{poDu,jdbcType=VARCHAR},
+            XTJSBMJ = #{xtjsbmj,jdbcType=VARCHAR},
+            CHL = #{chl,jdbcType=VARCHAR},
+            CHL_DJ = #{chlDj,jdbcType=VARCHAR},
+            YBD = #{ybd,jdbcType=VARCHAR},
+            HSMJ = #{hsmj,jdbcType=VARCHAR},
+            BHSMJ = #{bhsmj,jdbcType=VARCHAR},
+            HGMJ = #{hgmj,jdbcType=VARCHAR},
+            CLMJ = #{clmj,jdbcType=VARCHAR},
+            DBZMJ = #{dbzmj,jdbcType=VARCHAR},
+            BHGMJ = #{bhgmj,jdbcType=VARCHAR},
+            SSMJ = #{ssmj,jdbcType=VARCHAR},
+            BHSYY = #{bhsyy,jdbcType=VARCHAR},
+            WCLYY = #{wclyy,jdbcType=VARCHAR},
+            DBZYY = #{dbzyy,jdbcType=VARCHAR},
+            BHGYY = #{bhgyy,jdbcType=VARCHAR},
+            SSYY = #{ssyy,jdbcType=VARCHAR},
+            SFSJ = #{sfsj,jdbcType=VARCHAR},
+            SFSP = #{sfsp,jdbcType=VARCHAR},
+            SJDWZZ = #{sjdwzz,jdbcType=VARCHAR},
+            SFASJSS = #{sfasjss,jdbcType=VARCHAR},
+            SFYDA = #{sfyda,jdbcType=VARCHAR},
+            SFFY = #{sffy,jdbcType=VARCHAR},
+            SFGH = #{sfgh,jdbcType=VARCHAR},
+            SFZJ = #{sfzj,jdbcType=VARCHAR},
+            SFYHT = #{sfyht,jdbcType=VARCHAR},
+            SFYLQZ = #{sfylqz,jdbcType=VARCHAR},
+            YLFS = #{ylfs,jdbcType=VARCHAR},
+            SJYLMJ = #{sjylmj,jdbcType=VARCHAR},
+            HSYLMJ = #{hsylmj,jdbcType=VARCHAR},
+            ZLZTLX = #{zlztlx,jdbcType=VARCHAR},
+            BZ1 = #{bz1,jdbcType=VARCHAR},
+            BZ2 = #{bz2,jdbcType=VARCHAR},
+            BZ3 = #{bz3,jdbcType=VARCHAR},
+            HCRY = #{hcry,jdbcType=VARCHAR},
+            HCRQ = #{hcrq,jdbcType=VARCHAR},
+            PHOTO = #{photo,jdbcType=VARCHAR},
+            stat = #{stat,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    
+    
+    <sql id="xbDTOResult">
+    	xb.`COUNTY` AS "县",d.`CITY`,d.`COUNTY`, SUM(XTJSBMJ) as "countyUPArea"
+    </sql>
+    
+   	<!-- 查询县自检上报面积 -->
+    <select id="queryXTJSBMJGroupByCounty" resultType="com.yzl.pojo.dto.XbDTO">
+    	SELECT  
+    		<include refid="xbDTOResult"></include>
+    	  FROM 
+			`yzl_xb` xb 
+				INNER JOIN yzl_district d
+					ON xb.`COUNTY`=d.`Anumber`
+						where xb.county in
+						<!-- 根据用户权限查询 -->
+						 <foreach collection="anumbers" item="anumber" open="(" close=")" separator="," >
+				               #{anumber}
+				          </foreach>
+						  GROUP BY xb.county
+    </select>
+    
+    <select id="queryXTJSBMJGroupByCity"  resultType="com.yzl.pojo.dto.TaskDTO">
+    	 SELECT xb.`city` as "aNumber" ,SUM(xb.`XTJSBMJ`) AS "taskNumber"
+		   	FROM `yzl_xb` xb
+   			   where xb.county in
+				<!-- 根据用户权限查询 -->
+				 <foreach collection="anumbers" item="anumber" open="(" close=")" separator="," >
+		               #{anumber}
+		          </foreach>
+		          <if test="year != null">
+		          	AND ZYND = #{year}
+		          </if>
+		          <if test="stats != null and stats.size>0">
+		           	  AND stat in
+			           <foreach collection="stats" item="stat" open="(" close=")" separator="," >
+			               #{stat}
+			           </foreach>
+		          </if>
+   					GROUP By xb.`city` 
+    </select>
+
+
+<!--     <select id="queryXTJSBMJGroupCountyAndByCity"  resultType="map">
+    	 SELECT d.`city` ,SUM(xb.`XTJSBMJ`) AS "countyUPArea"
+		   	FROM `yzl_xb` xb
+	    		INNER JOIN yzl_district d  
+	    			ON d.`Anumber`= xb.`COUNTY`
+	    			   where xb.county in
+						根据用户权限查询
+						 <foreach collection="anumbers" item="anumber" open="(" close=")" separator="," >
+				               #{anumber}
+				          </foreach>
+	    					GROUP BY d.`city` 
+    </select> -->
+    <select id="queryXTJSBMJGroupCountyAndByCity"  resultType="com.yzl.pojo.dto.TaskDTO">
+   		 SELECT xb.`county` as "aNumber",SUM(xb.XTJSBMJ) AS "taskNumber"  
+	 		FROM yzl_xb xb
+				WHERE xb.city LIKE #{city} 
+				  AND xb.`COUNTY` IN 
+					<!-- 根据用户权限查询 -->
+					 <foreach collection="anumbers" item="anumber" open="(" close=")" separator="," >
+			               #{anumber}
+			          </foreach>
+			          <if test="year != null">
+			          	AND ZYND = #{year}
+			          </if>
+			          <if test="stat != null and stat !=''">
+			          	AND stat=${stat}
+			          </if>
+   						GROUP BY xb.`county`
+    </select>
+
+
+	    <!-- ////根据市的编号查询小班表中的拥有的县的编号 -->
+    <select id="selectByCityNumber" resultType="java.lang.String">
+    	
+    	SELECT DISTINCT county FROM (
+    		
+    		SELECT * FROM yzl_xb 
+    		
+    		<where>
+    			<if test="anumber != null and anumber != ''">
+    				city = #{anumber}
+    			</if>
+    			<if test="gc != null and gc != ''">
+    				and GCLB = #{gc}
+    			</if>
+    			<if test="zl != null and zl != ''">
+    				and ZLLB = #{zl}
+    			</if>
+    		</where>
+    		) xb
+    	
+    </select>
+    
+    <select id="selectByYer" resultType="java.lang.String">
+    	SELECT DISTINCT zynd FROM (
+    		
+    		SELECT * FROM yzl_xb 
+    		
+    		<where>
+    			<if test="anumber != null and anumber != ''">
+    				city = #{anumber}
+    			</if>
+    			<if test="times != null and times != ''">
+    				and ZYND = #{times}
+    			</if>
+    		</where>
+    		) xb
+    </select>
+    
+    <select id="selectByCountyAndTime" resultType="com.yzl.pojo.YzlXb">
+    	SELECT COUNTY,GCLB,ZLLB,XTJSBMJ,SFZJ,SFGH,SFYDA FROM yzl_xb
+    	<where>
+    		<if test="county!=null and county != ''">
+    			county like "%"#{county}"%"
+    		</if>
+    		<if test="time != null and time != ''">
+    			and zynd = #{time}
+    		</if>
+    		<if test="gclb != null and gclb != ''">
+    			and gclb = #{gclb}
+    		</if>
+    		<if test="zllb != null and zllb != ''">
+    			and zllb = #{zllb}
+    		</if>
+    	</where>
+    </select>
+    
+   <!-- 自治区分组查询 -->
+    <select id="selectByGropMunicipality" resultType="com.yzl.pojo.YzlXb">
+    	SELECT 
+    	<!-- city,county,gclb,zllb,zynd -->
+    	<include refid="selectByGrop"></include> 
+    	FROM yzl_xb GROUP BY ZYND,gclb,zllb
+    	<if test="permsList.size == 1">
+    	,county
+    	</if>
+    	<if test="permsList.size > 1 or permsList.size == 0">
+    	,city
+    	</if>
+   		having 1=1
+   		<if test=" sname != null and sname != '' and sname != 'null'">
+   			AND (city IN (
+			SELECT citycode FROM yzl_district WHERE city LIKE "%"#{sname}"%")
+			OR county IN (
+			SELECT Anumber FROM yzl_district WHERE county LIKE "%"#{sname}"%"
+			)
+			OR gclb IN ( SELECT mark FROM yzl_epc WHERE ename LIKE "%"#{sname}"%")
+			OR zllb IN (SELECT mark FROM yzl_task WHERE tname LIKE "%"#{sname}"%")
+			)
+   		</if>
+   		<if test="cityCode != null">
+   			and city = #{cityCode}
+   		</if>
+   		<if test="gclb != null and gclb != 'null'">
+   			and gclb = #{gclb}
+   		</if>
+   		<if test="zllb != null and zllb != 'null'">
+   			and zllb = #{zllb}
+   		</if>
+   		<if test="time != null and time != '' and time != 'null'">
+   			and zynd = #{time}
+   		</if>
+   		<if test="permsList != null and permsList.size > 0">
+   			AND county in
+   				<foreach collection="permsList" item="perms" open="(" separator="," close=")">
+   					#{perms}
+   				</foreach>
+    	</if>
+    	LIMIT #{page},#{rows}
+    </select>
+    
+    <!-- 自治区分组查询总记录数 -->
+    <select id="selecTtotalMunicipality" resultType="com.yzl.pojo.YzlXb">
+    	SELECT 
+    	<!-- city,county,gclb,zllb,zynd  -->
+    	
+    	<include refid="selectByGrop"></include>
+    	
+    	FROM yzl_xb GROUP BY ZYND,gclb,zllb
+    	<if test="permsList.size == 1">
+    	,county
+    	</if>
+    	<if test="permsList.size > 1 or permsList.size == 0">
+    	,city
+    	</if>
+    	
+   		having 1=1
+   		<if test=" sname != null and sname != '' and sname != 'null'">
+   			AND (city IN (
+			SELECT citycode FROM yzl_district WHERE city LIKE "%"#{sname}"%")
+			OR county IN (
+			SELECT Anumber FROM yzl_district WHERE county LIKE "%"#{sname}"%"
+			)
+			OR gclb IN ( SELECT mark FROM yzl_epc WHERE ename LIKE "%"#{sname}"%")
+			OR zllb IN (SELECT mark FROM yzl_task WHERE tname LIKE "%"#{sname}"%")
+			)
+   		</if>
+   		<if test="cityCode != null and cityCode != 'null'">
+   			and city = #{cityCode}
+   		</if>
+   		<if test="gclb != null and gclb != 'null'">
+   			and gclb = #{gclb}
+   		</if>
+   		<if test="zllb != null and zllb != 'null'">
+   			and zllb = #{zllb}
+   		</if>
+   		<if test="time != null and time != '' and time != 'null'">
+   			and zynd = #{time}
+   		</if>
+   		<if test="permsList != null and permsList.size > 0">
+   			AND county in
+   				<foreach collection="permsList" item="perms" open="(" separator="," close=")">
+   					#{perms}
+   				</foreach>
+    	</if>
+    </select>
+    
+    <!-- //根据市市市市分组查询 -->
+    <select id="selectByGropCity" resultType="com.yzl.pojo.YzlXb">
+    	SELECT 
+    	<!-- city,county,gclb,zllb,zynd -->
+    	<include refid="selectByGrop"></include> 
+    	FROM yzl_xb GROUP BY county ,ZYND ,gclb,zllb
+    	
+    	HAVING 
+		<if test="anumber != null and anumber != ''">
+			city = #{anumber}
+		</if>
+    	
+    	<if test=" sname != null and sname != '' and sname != 'null'">
+   			AND (
+			county IN (SELECT Anumber FROM yzl_district WHERE county LIKE "%"#{sname}"%")
+			OR gclb IN ( SELECT mark FROM yzl_epc WHERE ename LIKE "%"#{sname}"%")
+			OR zllb IN (SELECT mark FROM yzl_task WHERE tname LIKE "%"#{sname}"%")
+			)
+   		</if>
+   		<if test="cityCode != null and cityCode != 'null' and cityCode != ''">
+   			and county = #{cityCode}
+   		</if>
+   		<if test="gclb != null and gclb != 'null' and gclb != ''">
+   			and gclb = #{gclb}
+   		</if>
+   		<if test="zllb != null and zllb != 'null' and zllb != ''">
+   			and zllb = #{zllb}
+   		</if>
+    	<if test="times != null and times != '' and times != 'null'">
+    		AND zynd = #{times}
+    	</if>
+   	 	<if test="permsList != null and permsList.size > 0">
+   			AND county in
+   				<foreach collection="permsList" item="perms" open="(" separator="," close=")">
+   					#{perms}
+   				</foreach>
+    	</if>
+    	 LIMIT #{page},#{rows}
+    </select>
+    
+    <!-- //根据市市市市分组查询总记录数 -->
+	<select id="selecTtotalCity" resultType="com.yzl.pojo.YzlXb">
+	
+		SELECT 
+		<!-- city,county,gclb,zllb,zynd -->
+		<include refid="selectByGrop"></include> 
+		FROM yzl_xb GROUP BY county ,ZYND ,gclb,zllb
+		
+		HAVING 
+		
+		<if test="anumber != null and anumber != ''">
+			city = #{anumber}
+		</if>
+		
+		<if test=" sname != null and sname != '' and sname != 'null'">
+   			AND (
+			county IN (
+			SELECT Anumber FROM yzl_district WHERE county LIKE "%"#{sname}"%"
+			)
+			OR gclb IN ( SELECT mark FROM yzl_epc WHERE ename LIKE "%"#{sname}"%")
+			OR zllb IN (SELECT mark FROM yzl_task WHERE tname LIKE "%"#{sname}"%")
+			)
+   		</if>
+    	<if test="cityCode != null and cityCode != 'null' and cityCode != ''">
+   			and county = #{cityCode}
+   		</if>
+   		<if test="gclb != null and gclb != 'null' and gclb != ''">
+   			and gclb = #{gclb}
+   		</if>
+   		<if test="zllb != null and zllb != 'null' and zllb != ''">
+   			and zllb = #{zllb}
+   		</if>
+    	<if test="times != null and times != '' and times != 'null'">
+    		AND zynd = #{times}
+    	</if>
+    	<if test="permsList != null and permsList.size > 0">
+    		AND county in
+    		<foreach collection="permsList" item="perms" open="(" separator="," close=")">
+    			#{perms}
+    		</foreach>
+    	</if>
+	</select>
+	
+	<!-- 根据县县县县分组查询 -->
+	<select id="selectByGropCounty" resultType="com.yzl.pojo.YzlXb">
+		SELECT 
+		<!-- city,county,zynd,gclb,zllb -->
+		<include refid="selectByGrop"></include> 
+		FROM yzl_xb GROUP BY county , zynd ,gclb,zllb
+		HAVING 1=1
+		<if test="number != null and number != ''">
+			and county = #{number} 
+		</if>
+		
+		<if test=" sname != null and sname != '' and sname != 'null'">
+   			AND (
+			gclb IN ( SELECT mark FROM yzl_epc WHERE ename LIKE "%"#{sname}"%")
+			OR zllb IN (SELECT mark FROM yzl_task WHERE tname LIKE "%"#{sname}"%")
+			)
+   		</if>
+   		<if test="gclb != null and gclb != '' and gclb != 'null'">
+   			and gclb = #{gclb}
+   		</if>
+   		<if test="zllb != null and zllb != '' and zllb != 'null'">
+   			and zllb = #{zllb}
+   		</if>
+		<if test="time != null and time != '' and time != 'null'">
+    		AND zynd = #{time}
+    	</if>
+		LIMIT #{page},#{rows}
+	</select>
+	
+	<!-- 根据县县县县分组查询 总记录数-->
+	<select id="selecTtotalCounty" resultType="com.yzl.pojo.YzlXb">
+		
+		SELECT 
+		<!-- county,zynd,gclb,zllb -->
+		<include refid="selectByGrop"></include> 
+		FROM yzl_xb GROUP BY county , zynd ,gclb,zllb
+		HAVING 1=1
+		<if test="number != null and number != ''">
+			 and county = #{number} 
+		</if>
+		<if test=" sname != null and sname != '' and sname != 'null'">
+   			AND (
+			gclb IN ( SELECT mark FROM yzl_epc WHERE ename LIKE "%"#{sname}"%")
+			OR zllb IN (SELECT mark FROM yzl_task WHERE tname LIKE "%"#{sname}"%")
+			)
+   		</if>
+   		<if test="gclb != null and gclb != '' and gclb != 'null'">
+   			and gclb = #{gclb}
+   		</if>
+   		<if test="zllb != null and zllb != '' and zllb != 'null'">
+   			and zllb = #{zllb}
+   		</if>
+		<if test="time != null and time != '' and time != 'null'">
+    		AND zynd = #{time}
+    	</if>
+	</select>
+	<sql id="TaskWoring_Column_List">
+		stat,xb.id,xb.city as "cityNumber",xb.county as "countyNumber",GCLB,ZLLB,JHND,ZYND,sum(XTJSBMJ) as "XTJSBMJ",d.city as "cityName",d.county as "countyName"
+	</sql>
+	
+		
+	
+	<resultMap type="com.yzl.utils.dto.CountyTaskWorkingDTO" id="TaskWorkingResultMap">
+        <id column="id" property="id"/>
+        <result column="cityNumber" property="cityNumber"/> <!-- 市级行政编号 -->
+        <result column="countyNumber" property="countyNumber"/><!-- 县级行政编号 -->
+        <result column="cityName" property="city"/><!-- 市级名称 -->
+        <result column="countyName" property="county"/><!-- 县级名称-->
+        <result column="GCLB" property="GCLB"/><!-- 工程类别 -->
+        <result column="ZLLB" property="ZLLB"/><!-- 造林类别 -->
+        <result column="JHND" property="JHND"/><!-- 计划年度 -->
+        <result column="ZYND" property="ZYND"/><!-- 作业年度 -->
+        <result column="XTJSBMJ" property="XTJSBMJ"/><!-- 县自检上报面积-->
+	</resultMap>
+
+
+	<!-- 通过作业年度查询县级自检上报面积并通过 县级、工程类别、造林类别、作业年度、计划年度进行分组 -->
+	<select id="queryTaskWorkingByGroupCountyAndGCLBAndZLLB" resultMap="TaskWorkingResultMap">
+		SELECT 
+			<include refid="TaskWoring_Column_List"></include>
+				FROM `yzl_xb` xb
+					INNER JOIN yzl_district d
+						ON xb.county=d.Anumber
+						where
+							 xb.county in
+                            <foreach collection="aNumbers" item="aNumber" open="(" close=")" separator="," >
+                                #{aNumber}
+                            </foreach>
+	                        <if test="year!=null and year != ''">
+	                            And xb.ZYND=#{year}
+	                        </if>
+				  			<if test="stats !=null and stats.size > 0">
+				  				and stat IN
+				  				<foreach collection="stats" item="stat" open="(" separator="," close=")">
+				  					${stat}
+				  				</foreach>
+				  			</if>
+				  			GROUP BY xb.county,GCLB,ZLLB,ZYND,JHND
+				  			
+				  			
+	</select>
+
+	<!-- 根据地区行政编号和作业年度查询县级自检上报面积并通过 县级、工程类别、造林类别、作业年度、计划年度进行分组 -->
+<!-- 	<select id="queryTaskWorkingByGroupCountyAndGCLBAndZLLBAndAreaCode" resultMap="TaskWorkingResultMap">
+		SELECT 
+			<include refid="TaskWoring_Column_List"></include>
+				FROM `yzl_xb` xb
+					INNER JOIN yzl_district d
+						ON xb.county=d.Anumber
+						where
+						  xb.county in
+                            <foreach collection="aNumbers" item="aNumber" open="(" close=")" separator="," >
+                                #{aNumber}
+                            </foreach>
+                            <if test="stats!=null and stats.size>0">
+	                            and xb.stat in
+	                             <foreach collection="stats" item="statu" open="(" close=")" separator="," >
+	                                #{statu}
+	                            </foreach>
+                            </if>
+                            <if test="year != null and year !=''">
+                            	And xb.ZYND=#{year} 
+                            </if>
+                            <if test="areaCode != null and areaCode != ''">
+                            	And xb.county like #{areaCode}"%"
+                            </if>
+				  			GROUP BY xb.county,GCLB,ZLLB,ZYND,JHND
+	</select> -->
+	
+	<update id="updateByMark">
+		UPDATE yzl_xb SET stat = #{stat}
+		<where>
+			<if test="city != null and city != '' and city != 'null'">
+				AND CITY = #{city}
+			</if>
+			<if test="county != null and county != ''">
+				AND COUNTY = #{county}
+			</if>
+			<if test="JHND != null and JHND != ''">
+				AND JHND = #{JHND}
+			</if>
+			<if test="ZYND != null and ZYND != ''">
+				AND ZYND = #{ZYND}
+			</if>
+			<if test="zllb != null and zllb != '' and zllb != 'null'">
+				AND zllb = #{zllb}
+			</if>
+		</where>
+		
+		<if test="stats != null ">
+			AND stat in 
+			<foreach collection="stats" item="st" open="(" separator="," close=")">
+				#{st}
+			</foreach>
+		</if>
+	</update>
+	
+	<!-- 查询工程对应的任务 -->
+	<select id="selectByCodeAndEpc" resultType="com.yzl.pojo.YzlTask">
+		
+		SELECT * FROM yzl_task WHERE mark IN(
+			SELECT DISTINCT zllb FROM yzl_xb
+			<where>
+			<if test="stat != null and stat != ''">
+				AND stat = #{stat}
+			</if>
+			<if test="time != null and time != ''">
+				and ZYND = ${time}
+			</if>
+			<if test="epc != null and epc != ''">
+				AND GCLB = #{epc}
+			</if>
+			<if test="code != null and code != ''">
+				AND county LIKE "%"#{code}"%"
+			</if>
+			
+		</where>  
+			)
+	</select>
+	
+	<select id="seletByEpcAndTask" resultType="com.yzl.utils.dto.CountyTaskWorkingDTO">
+		
+		SELECT stat,county,GCLB,ZLLB ,JHND,ZYND,SUM(XTJSBMJ) AS XTJSBMJ 
+		FROM yzl_xb xb
+		GROUP BY COUNTY,ZYND,gclb,ZLLB
+		HAVING 1=1
+		<if test="time != null and time != ''">
+			and zynd = #{time}
+		</if>
+		<if test="code != null and code != ''">
+			AND county LIKE "%"#{code}"%"
+		</if>
+		<if test="epc != null and epc != ''">
+			AND GCLB = #{epc}
+		</if>
+		<if test="authoritys != null and authoritys.size>0">
+			AND COUNTY IN
+			 <foreach collection="authoritys" item="authority" open="(" close=")" separator="," >
+                #{authority}
+              </foreach>
+		</if>
+		<if test="stats != null and stats.size>0">
+			AND xb.stat IN
+			 <foreach collection="stats" item="statu" open="(" close=")" separator="," >
+                #{statu}
+              </foreach>
+		</if>
+	</select>
+	
+	<sql id="selectByGrop">
+		city,county,gclb,zllb,zynd,
+		SUM(XTJSBMJ) AS XTJSBMJ,SUM(HSMJ) AS HSMJ ,SUM(HGMJ)HGMJ,SUM(SJYLMJ) AS SJYLMJ,SUM(HSYLMJ) AS HSYLMJ,SUM(CLMJ) AS CLMJ
+	</sql>
+	
+	<select id="selectByEidAndTime" resultType="com.yzl.pojo.YzlXb">
+		SELECT CITY,county,GCLB,ZLLB,ZYND,stat FROM yzl_xb WHERE GCLB = #{eid} AND ZYND = #{year} 
+		AND COUNTY = (SELECT Anumber FROM yzl_district WHERE county LIKE "%"#{county}"%")
+		AND stat = "0" OR stat = NULL
+	</select>
+	
+	<!-- //查询审核完成的表头 -->
+	<select id="selectEpcTabName" resultType="com.yzl.pojo.YzlTask">
+		SELECT * FROM yzl_task WHERE mark IN(
+		SELECT DISTINCT ZLLB FROM yzl_xb where ZYND = #{year} 
+		<if test="zllb != null and zllb != '' and zllb != 'null'">
+			AND zllb = #{zllb}
+		</if>
+		<if test="stats.size() > 0">
+		AND stat in
+			<foreach collection="stats" item="stat" open="(" separator="," close=")">
+				#{stat}
+			</foreach>
+		</if>
+		
+		<if test="disCode != 'null' and disCode != '' and disCode != null and disCode != 'GX450'">
+			<if test="disCode.length() == 2 ">
+				<if test="menu.size == 1">
+					and county =
+					<foreach collection="menu" item="m">
+					 	#{m}
+					</foreach>
+				</if>
+				<if test="menu.size > 1 or menu.size == 0">
+					And city = (SELECT DISTINCT cityCode FROM yzl_district WHERE flag = #{disCode})
+				</if>
+			</if>
+			<if test="disCode.length() > 2">
+				AND county = #{disCode}
+			</if>
+		</if>
+		<if test="disCode == 'null' or disCode == 'GX450' or disCode == '' or disCode == null">
+			<if test="menu.size > 0">
+				and county in
+				<foreach collection="menu" item="m" open="(" separator="," close=")">
+					#{m}
+				</foreach>
+			</if>
+		</if>
+		)
+	</select>
+	
+	<!-- //查询这个造林类别拥有的工程 -->
+	<select id="selectByEpcPossessTask" resultType="com.yzl.pojo.YzlEpc">
+		SELECT * FROM yzl_epc WHERE mark IN(	
+		SELECT DISTINCT GCLB FROM yzl_xb WHERE  ZYND = #{year} 
+		<choose>
+			<when test="zllb != null and zllb != '' and zllb != 'null'">
+				AND zllb = #{zllb}
+			</when>
+			<otherwise>
+				AND zllb = #{tcode}
+			</otherwise>
+		</choose>
+		<if test="stats.size > 0 and stats !=null">
+			AND stat in 
+			<foreach collection="stats" item="stat" open="(" separator="," close=")">
+				#{stat}
+			</foreach>
+		</if>
+		<if test="disCode != null">
+			<if test="disCode.length() == 2">
+				and city = (SELECT DISTINCT cityCode FROM yzl_district WHERE flag = #{disCode})
+				<if test="menu.size == 1">
+					and county = 
+					<foreach collection="menu" item="m" open="(" separator="," close=")">
+						#{m}
+					</foreach>
+				</if>
+			</if>
+			<if test="disCode.length() == 6">
+				and county = #{disCode}
+			</if>
+		</if>
+		
+		<if test="disCode == null or disCode == 'null' or disCode == 'GX450' or disCode == '' ">
+			<if test="menu.size > 0 and menu !=null">
+				and county in
+				<foreach collection="menu" item="m" open="(" separator="," close=")">
+					#{m}
+				</foreach>
+			</if>
+		</if>
+		)
+	</select>
+	
+	<select id="selectByGroupStaticti" resultType="com.yzl.utils.YzlEpcAndTaskStaticti">
+		SELECT DISTINCT city FROM yzl_xb WHERE stat = #{stat} AND ZYND = #{year}
+	</select>
+	
+	<!-- //查询所有这个状态的市去重 -->
+	<select id="selectByCityAndTimeAndStat" resultType="java.lang.String">
+		
+		<if test="menu.size > 0">
+		SELECT DISTINCT county FROM yzl_xb WHERE ZYND = #{year} and 1=1
+			<if test="stats.size > 0">
+				AND stat in
+				<foreach collection="stats" item="start" open="(" separator="," close=")">
+					#{start}
+				</foreach>
+			</if>
+
+			and county in
+			<foreach collection="menu" item="m" open="(" separator="," close=")">
+				#{m}
+			</foreach>
+		</if>
+		<if test="menu.size == 0">
+			SELECT DISTINCT city FROM yzl_xb WHERE ZYND = #{year}
+			<if test="stats.size > 0">
+				AND stat in
+				<foreach collection="stats" item="start" open="(" separator="," close=")">
+					#{start}
+				</foreach>
+			</if>
+		</if>
+	</select>
+	
+	<!-- //查询这个市今年有多少个工程 -->
+	<select id="selectByCityAndEpc" resultType="com.yzl.utils.YzlEpcAndTaskStaticti">
+			
+			<if test="menu.size > 0 and disCode.length() != 2 and disCode.length() != 6 and disCode != null">
+				SELECT city,county,GCLB,ZLLB,JHND,ZYND,stat,SUM(XTJSBMJ) AS XTJSBMJ FROM yzl_xb GROUP BY county,GCLB,ZLLB,JHND,ZYND 
+				HAVING 1=1  AND ZYND = #{year}
+				
+				<if test="zllb != null and zllb != ''">
+					AND zllb = #{zllb}
+				</if>
+				
+				<if test="stats.size > 0">
+					AND stat in
+					<foreach collection="stats" item="st" open="(" separator="," close=")">
+						#{st}
+					</foreach>
+				</if>
+				
+					AND county IN
+					<foreach collection="citys" item="ct" open="(" separator="," close=")">
+						#{ct}
+					</foreach>
+			</if>
+			
+			<if test="menu.size == 0 or disCode.length() == 2 or disCode.length() == 6 or disCode == null">
+				SELECT city,county,GCLB,ZLLB,JHND,ZYND,stat,SUM(XTJSBMJ) AS XTJSBMJ FROM yzl_xb 
+				<where>
+					<if test="zllb != null and zllb != ''">
+						AND zllb = #{zllb}
+					</if>
+					<if test="stats.size > 0">
+						AND stat in
+						<foreach collection="stats" item="st" open="(" separator="," close=")">
+							#{st}
+						</foreach>
+					</if>
+					 AND ZYND = #{year}
+					AND county LIKE "%"#{city}"%"
+				</where>
+					
+				GROUP BY city,GCLB,ZLLB,JHND,ZYND<!-- ,county  -->
+				<if test="disCode.length() == 2 or disCode.length() == 6">
+					,county
+				</if>
+			</if>
+			
+			
+	</select>
+	
+	<!-- //得到这个市这个工程今年的数据 -->
+	<select id="selectByEidAndCityAndTime" resultType="com.yzl.utils.YzlEpcAndTaskStaticti">
+		SELECT city,county,GCLB,ZLLB,JHND,ZYND,stat,SUM(XTJSBMJ) AS XTJSBMJ FROM yzl_xb GROUP BY GCLB,ZLLB,JHND,ZYND
+		HAVING 1=1 AND stat = #{stat} AND ZYND = #{year} AND city = #{city} and GCLB = #{eid}
+	</select>
+	
+	<select id="selectByCity" resultType="java.lang.String">
+		SELECT DISTINCT city FROM yzl_district WHERE cityCode = #{city}
+	</select>
+	
+	<select id="selectByCityAndTimeAndStatCountyAndCity" resultType="java.lang.String">
+		SELECT DISTINCT county FROM yzl_xb WHERE ZYND = #{year} 
+		<if test="stats.size > 0">
+			AND stat in 
+			<foreach collection="stats" item="stat" open="(" separator="," close=")">
+				#{stat}
+			</foreach>
+		</if>
+		
+		<if test="disCode != null and disCode != ''">
+			<if test="disCode.length() == 2">
+				<if test="menu.size == 1">
+					and county = 
+					<foreach collection="menu" item="m">
+						#{m}
+					</foreach>
+				</if>
+				<if test="menu.size > 1">
+					AND city = (SELECT DISTINCT cityCode FROM yzl_district WHERE flag = #{disCode})
+				</if>
+				<if test="menu.size == 0">
+					AND city = (SELECT DISTINCT cityCode FROM yzl_district WHERE flag = #{disCode})
+				</if>
+			</if>
+			<if test="disCode.length() > 2">
+				AND county = #{disCode}
+			</if>
+		</if>
+		 
+	</select>
+	
+	<select id="selectByFlagOrDcode" resultType="java.lang.String">
+		SELECT Anumber FROM yzl_district WHERE flag = #{nid} OR dcode = #{nid}
+	</select>
+	
+	<select id="selectByeid" resultType="com.yzl.pojo.YzlXb">
+	
+		SELECT DISTINCT ZLLB 
+		FROM yzl_xb WHERE ZYND = #{year} AND stat = #{stat} AND GCLB = #{eid}
+		<if test="Anumbers.size > 0">
+			AND county IN
+			<foreach collection="Anumbers" item="anumbers" open="(" separator="," close=")">
+				#{anumbers}
+			</foreach>
+		</if>
+		<if test="menu.size > 0 and Anumbers.size == 0">
+			AND county IN
+			<foreach collection="menu" item="men" open="(" separator="," close=")">
+				#{men}
+			</foreach>
+		</if>
+		
+	</select>
+	<!-- eid工程，year年，TaskWorkSatusEnum.TASK_CITY_VERIFIED.getCode()状态。dis地区，menu权限 -->
+	<!-- selectByEpcPossessTask(eid, year, TaskWorkSatusEnum.TASK_CITY_VERIFIED.getCode(), dis,menu); -->
+	<select id="selectByEpc" resultType="com.yzl.pojo.YzlXb">
+		SELECT DISTINCT ZLLB FROM yzl_xb WHERE ZYND = #{year} AND stat = #{stat} AND GCLB = (
+		
+		SELECT mark FROM yzl_epc WHERE ename = #{ename})
+		
+		<if test="Anumbers.size > 0">
+			and county in 
+			<foreach collection="Anumbers" item="number" open="(" separator="," close=")">
+				#{number}
+			</foreach>
+		</if>
+		
+	</select>
+	
+	<select id="selectByPlanTask" resultType="com.yzl.pojo.YzlEpcTaskProgress">
+		SELECT GCLB ,ZLLB,cityCode,countyCode,ZYND,JHND, SUM(taskProgress) AS taskProgress FROM yzl_epc_task_progress WHERE GCLB = #{gclb} AND ZLLB = #{zllb} AND countyCode LIKE "%"#{county}"%" AND ZYND = #{zynd} AND JHND = #{jhnd}
+	</select>
+	
+	<!-- 查出这个状态造林类别今年完成了多少 -->
+	<select id="selectByCompleteTask" resultType="com.yzl.utils.YzlEpcAndTaskStaticti">
+		SELECT <include refid="CompleteTask"></include> FROM yzl_xb  WHERE GCLB = #{gclb} AND ZLLB = #{zllb} AND COUNTY LIKE "%"#{county}"%" AND ZYND = #{zynd} AND JHND = #{jhnd}
+		<if test="stats.size > 0">
+			 AND stat in
+			 <foreach collection="stats" item="st" open="(" separator="," close=")">
+			 	#{st}
+			 </foreach>
+		</if>
+	</select>
+	
+	
+	<sql id="CompleteTask">
+		city,county,GCLB,ZLLB,JHND,ZYND,stat,SUM(XTJSBMJ) AS XTJSBMJ
+	</sql>
+	<select id="selectByTaskPossessEpc" resultType="java.lang.String">
+		SELECT DISTINCT GCLB FROM yzl_epc_task_progress WHERE zllb = #{tcode} AND ZYND = #{year} AND stat = #{stat}
+		<if test="nid.length() > 1 ">
+			AND countyCode like "%"#{nid}"%"
+		</if>
+		 
+	</select>
+	
+	
+	
+		<!-- 根据地区行政编号和作业年度查询县级自检上报面积并通过 县级、工程类别、造林类别、作业年度、计划年度进行分组 -->
+	<select id="queryTaskWorkingByGroupCountyAndGCLBAndZLLBAndAreaCode" resultMap="TaskWorkingResultMap">
+		SELECT 
+			<include refid="TaskWoring_Column_List"></include>
+				FROM `yzl_xb` xb
+					INNER JOIN yzl_district d
+						ON xb.county=d.Anumber
+						where
+						  xb.county in
+                            <foreach collection="aNumbers" item="aNumber" open="(" close=")" separator="," >
+                                #{aNumber}
+                            </foreach>
+                            <if test="stats!=null and stats.size>0">
+	                            and xb.stat in
+	                             <foreach collection="stats" item="statu" open="(" close=")" separator="," >
+	                                #{statu}
+	                            </foreach>
+                            </if>
+                            <if test="year != null and year !=''">
+                            	And xb.ZYND=#{year} 
+                            </if>
+                            <if test="areaCode != null and areaCode != ''">
+                            	And xb.county like #{areaCode}"%"
+                            </if>
+				  			GROUP BY xb.county,GCLB,ZLLB,ZYND,JHND
+	</select>
+	
+	
+		        <!-- 判断计划年度、地区行政编号(模糊查询)、权限 sql片段 -->
+    <sql id="AuthorityToJudgeAndAreaCodeAndJHND">
+    	<if test="year!=null">
+    		and ZYND = #{year}    	
+    	</if>
+    	<if test="areaCode!=null">
+    		and county like #{areaCode}"%"
+    	</if>
+    	<if test="authoritys!=null and authoritys.size>0">
+    		and county in 
+			 <foreach collection="authoritys" item="authority" open="( " close=" ) " separator=",">
+	             #{authority}
+	         </foreach>
+         </if>
+    </sql>
+	
+	
+	<!-- 根据地区行政编号和作业年度查询县级自检上报面积并通过 市级、工程类别、造林类别、作业年度、计划年度进行分组 -->
+	<select id="queryCityDataByParamGroupByCityAndGCLBAndZLLBAndJHNDAndZYND"  resultType="com.yzl.utils.YzlEpcAndTaskStaticti">
+		SELECT city,county,GCLB,ZLLB,JHND,ZYND,stat,SUM(XTJSBMJ) AS XTJSBMJ FROM yzl_xb 
+			where 1=1
+			<if test="stats.size > 0">
+				AND stat IN
+				<foreach collection="stats" item="stat" open="(" separator="," close=")">
+					#{stat}
+				</foreach>
+			</if>
+			<include refid="AuthorityToJudgeAndAreaCodeAndJHND"></include>
+			<if test="ZLLB !=null and ZLLB !='' and ZLLB!='null'">
+				and ZLLB = #{ZLLB}
+			</if>
+			<if test="GCLB !=null and GCLB !=''">
+				and GCLB = #{GCLB}
+			</if>
+			 GROUP BY city,GCLB,ZLLB,JHND,ZYND 
+	</select>
+	
+		<!-- 根据地区行政编号和作业年度查询县级自检上报面积并通过 县级、工程类别、造林类别、作业年度、计划年度进行分组 -->
+	<select id="queryCountyDataByParamGroupByCountyAndGCLBAndZLLBAndJHNDAndZYND" resultType="com.yzl.utils.YzlEpcAndTaskStaticti">
+		SELECT city,county,GCLB,ZLLB,JHND,ZYND,stat,SUM(XTJSBMJ) AS XTJSBMJ FROM yzl_xb 
+			where 1=1
+			<if test="stats.size > 0">
+				AND stat IN
+				<foreach collection="stats" item="stat" open="(" separator="," close=")">
+					#{stat}
+				</foreach>
+			</if>
+			<if test="ZLLB !=null and ZLLB !='' and ZLLB!='null'">
+				and ZLLB = #{ZLLB}
+			</if>
+			<if test="GCLB !=null and GCLB !=''">
+				and GCLB = #{GCLB}
+			</if>
+			<include refid="AuthorityToJudgeAndAreaCodeAndJHND"></include>
+			 GROUP BY county,GCLB,ZLLB,JHND,ZYND 
+	</select>
+	
+	<!-- //查询这个市今年有多少个工程完成的 -->
+	<select id="selectByCityAndEpcComplation" resultType="com.yzl.utils.YzlEpcAndTaskStaticti">
+			
+			<if test="menu.size > 0 and disCode.length() != 2 and disCode.length() != 6 and disCode != null">
+				SELECT city,county,GCLB,ZLLB,JHND,ZYND,stat,SUM(XTJSBMJ) AS XTJSBMJ FROM yzl_xb GROUP BY county,GCLB,ZLLB,JHND,ZYND 
+				HAVING 1=1  AND ZYND = #{year}
+				
+				<if test="zllb != null and zllb != '' and zllb != 'null'">
+					AND zllb = #{zllb}
+				</if>
+				
+				<if test="stats.size > 0">
+					AND stat in
+					<foreach collection="stats" item="st" open="(" separator="," close=")">
+						#{st}
+					</foreach>
+				</if>
+				
+					AND county IN
+					<foreach collection="citys" item="ct" open="(" separator="," close=")">
+						#{ct}
+					</foreach>
+			</if>
+			
+			<if test="menu.size == 0 or disCode.length() == 2 or disCode.length() == 6 or disCode == null">
+				SELECT city,county,GCLB,ZLLB,JHND,ZYND,stat,SUM(XTJSBMJ) AS XTJSBMJ 
+				FROM (SELECT city,county,GCLB,ZLLB,JHND,ZYND,stat, XTJSBMJ FROM yzl_xb WHERE 1=1 
+				
+				<if test="stats.size > 0">
+					AND stat in
+					<foreach collection="stats" item="st" open="(" separator="," close=")">
+						#{st}
+					</foreach>
+				</if>
+				) as xxc
+				 
+				GROUP BY city,GCLB,ZLLB,JHND,ZYND<!-- ,county  -->
+				<if test="disCode.length() == 2 or disCode.length() == 6">
+					,county
+				</if>
+				
+				HAVING 1=1
+				<if test="zllb != null and zllb != '' and zllb != 'null'">
+					AND zllb = #{zllb}
+				</if>
+				
+				 AND ZYND = #{year}
+					AND county LIKE "%"#{city}"%"
+			</if>
+	</select>
+	
+	
+	<select id="countCityZllbNumber" resultType="com.yzl.utils.CountZLLBDTO">
+		SELECT city,SUM(xb.`XTJSBMJ`) as "XTJSBMJ",xb.`ZLLB`  
+			FROM yzl_xb xb 
+				where stat in
+                <foreach collection="stats" item="stat" open="(" close=")" separator="," >
+                    #{stat}
+                </foreach>
+			
+				GROUP BY xb.`ZLLB`,xb.`city`
+				
+	</select>
+	
+	<select id="countCountyZllbNumber" resultType="com.yzl.utils.CountZLLBDTO">
+		SELECT city,county,SUM(xb.`XTJSBMJ`) as "XTJSBMJ",xb.`ZLLB`  
+			FROM yzl_xb xb 
+				GROUP BY xb.`ZLLB`,xb.`county`
+	</select>
+	
+	<select id="countCountyNmberByStat" resultType="int">
+			SELECT COUNT(DISTINCT county) FROM `yzl_xb` xb 
+				WHERE xb.`stat` in
+                <foreach collection="stats" item="stat" open="(" close=")" separator="," >
+                    #{stat}
+                </foreach>
+               and  xb.`COUNTY` in
+                <foreach collection="authoritys" item="authority" open="(" close=")" separator="," >
+                    #{authority}
+                </foreach>
+                group by county
+	</select>
+	
+	<select id="selectByCityCountyTaskIssued" parameterType="java.lang.String" resultType="com.yzl.pojo.YzlEpcTaskProgress">
+		SELECT GCLB,ZLLB,cityCode,countyCode,ZYND,SUM(taskProgress) AS taskProgress FROM yzl_epc_task_progress 
+		<where>
+			<if test="year!=null">
+				ZYND = #{year}
+			</if>
+			<if test="menu.size == 1">
+					AND cityCode = 
+					<foreach collection="menu" item="m">
+					 	#{m}
+					</foreach>
+			</if>
+			<if test="zllb != null and zllb != '' and zllb != 'null'">
+				and zllb = #{zllb}
+			</if>
+			<if test="stats != null and stats.size > 0">
+			 	and stat in
+			 	<foreach collection="stats" item="st" open="(" separator="," close=")">
+			 		#{st}
+			 	</foreach>
+			 </if>
+		</where>
+		GROUP BY GCLB,ZLLB,cityCode
+	</select>
+	<select id="queryCountyAndCityAndUpdateTimeAndStat" resultType="com.yzl.utils.vo.BacklogVO">
+			SELECT d.city,d.county,xb.stat,max(log.operate_time) as "time" FROM `yzl_xb` xb left join yzl_log log on xb.county=log.dcode
+				inner join yzl_district d on d.Anumber = xb.county 
+				WHERE xb.`stat` in
+                <foreach collection="stats" item="stat" open="(" close=")" separator="," >
+                    #{stat}
+                </foreach>
+               and  xb.`COUNTY` in
+                <foreach collection="authoritys" item="authority" open="(" close=")" separator="," >
+                    #{authority}
+                </foreach>
+                group by county,xb.stat
+                order by max(xb.stat) asc
+	</select>
+
+		<!-- 查询最近任务下发的数据，根据地区行政编号和作业年度和最近消息县级编号查询县级自检上报面积并通过 县级、工程类别、造林类别、作业年度、计划年度进行分组 -->
+	<select id="queryCountyDataByParamGroupByCountyAndGCLBAndZLLBAndJHNDAndZYNDAndMessageCounty" resultType="com.yzl.utils.YzlEpcAndTaskStaticti">
+		SELECT city,county,GCLB,ZLLB,JHND,ZYND,stat,SUM(XTJSBMJ) AS XTJSBMJ FROM yzl_xb 
+			where 1=1
+			<if test="stats !=null and stats.size > 0">
+				AND stat IN
+				<foreach collection="stats" item="stat" open="(" separator="," close=")">
+					#{stat}
+				</foreach>
+			</if>
+			<if test="ZLLB !=null and ZLLB !='' and ZLLB!='null'">
+				and ZLLB = #{ZLLB}
+			</if>
+			<if test="GCLB !=null and GCLB !=''">
+				and GCLB = #{GCLB}
+			</if>
+			
+				<if test="message.countycode!=null and message.countycode!=''">
+					AND county = #{message.countycode}
+				</if>
+				<if test="message.jhnd!=null and message.jhnd!=''">
+					and JHND = #{message.jhnd}
+				</if>
+				<if test="message.zynd!=null and message.zynd!=''">
+					and ZYND = #{message.zynd}
+				</if>
+				<if test="message.gclb!=null and message.gclb!=''">
+					and GCLB = #{message.gclb}
+				</if>
+				<if test="message.zllb!=null and message.zllb!=''">
+					and ZLLB = #{message.zllb}
+				</if>
+			<include refid="AuthorityToJudgeAndAreaCodeAndJHND"></include>
+
+			 GROUP BY county,GCLB,ZLLB,JHND,ZYND 
+	</select>
+
+	<!-- 根据地区行政编号和作业年度查询县级自检上报面积并通过 市级、工程类别、造林类别、作业年度、计划年度进行分组 -->
+	<select id="queryCityDataByParamGroupByCityAndGCLBAndZLLBAndJHNDAndZYNDAndMessageCounty"  resultType="com.yzl.utils.YzlEpcAndTaskStaticti">
+		SELECT city,county,GCLB,ZLLB,JHND,ZYND,stat,SUM(XTJSBMJ) AS XTJSBMJ FROM yzl_xb 
+			where 1=1
+			<if test="stats.size > 0">
+				AND stat IN
+				<foreach collection="stats" item="stat" open="(" separator="," close=")">
+					#{stat}
+				</foreach>
+			</if>
+			<include refid="AuthorityToJudgeAndAreaCodeAndJHND"></include>
+			<if test="ZLLB !=null and ZLLB !='' and ZLLB!='null'">
+				and ZLLB = #{ZLLB}
+			</if>
+			<if test="GCLB !=null and GCLB !=''">
+				and GCLB = #{GCLB}
+			</if>
+				<if test="message.countycode!=null and message.countycode!=''">
+					AND county = #{message.countycode}
+				</if>
+				<if test="message.jhnd!=null and message.jhnd!=''">
+					and JHND = #{message.jhnd}
+				</if>
+				<if test="message.zynd!=null and message.zynd!=''">
+					and ZYND = #{message.zynd}
+				</if>
+				<if test="message.gclb!=null and message.gclb!=''">
+					and GCLB = #{message.gclb}
+				</if>
+				<if test="message.zllb!=null and message.zllb!=''">
+					and ZLLB = #{message.zllb}
+				</if>
+			 GROUP BY city,GCLB,ZLLB,JHND,ZYND 
+	</select>
+
+	<select id="selectByCityComplation" resultType="com.yzl.pojo.YzlXb">
+		SELECT city,county,GCLB,ZLLB,ZYND,JHND,SUM(XTJSBMJ) AS XTJSBMJ,stat FROM yzl_xb
+		<where>
+			<if test="year != null and year != ''">
+				ZYND = #{year}
+			</if>
+			<if test="stats != null and stats.size > 0">
+				AND stat IN
+				<foreach collection="stats" item="stat" open="(" separator="," close=")">
+					#{stat}
+				</foreach>
+				
+			</if>
+			<if test="proceed != null and proceed != '' and proceed != 'null'">
+				and zllb = #{proceed}
+			</if>
+			<!-- <if test="menu.size == 1">
+				AND city =
+				<foreach collection="menu" item="m">
+					#{m}
+				</foreach>
+			</if> -->
+			<if test="disCode != null and disCode != '' and disCode.length() == 2 and disCode != 'GX450' and disCode != '45'">
+				and city =(SELECT DISTINCT citycode FROM yzl_district WHERE flag = #{disCode})
+			</if>
+			<if test="disCode != null and disCode != '' and disCode.length() >= 6 and disCode != 'GX450'">
+				and county = #{disCode}
+			</if>
+		</where>
+		GROUP BY GCLB,ZLLB,ZYND
+		<choose>
+			<when test="disCode.length() >= 2 and disCode != 'GX450'">
+				,county
+			</when>
+			<otherwise>
+				,city
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectByTaskIssuedTableHead" resultType="com.yzl.pojo.YzlTask">
+		SELECT * FROM yzl_task
+		WHERE mark IN(
+			SELECT zllb FROM yzl_epc_task_progress
+			<where>
+				<if test="year != null and year != ''">
+					and zynd = #{year}
+				</if>
+				 <if test="zllb != null and zllb != ''">
+				 	and ZLLB = #{zllb}
+				 </if>
+				 <if test="disCode != null and disCode != '' and disCode.length() == 2 and disCode != '45'">
+				 	and cityCode = (select distinct citycode from yzl_district where flag = #{disCode})
+				 </if>
+				 <if test="disCode != null and disCode != '' and disCode.length() == 4 ">
+				 	and cityCode = #{disCode}
+				 </if>
+				 <if test="disCode != null and disCode != '' and disCode.length() >= 6">
+				 	and countyCode = #{disCode}
+				 </if>
+				 <if test="menu != null and menu.size > 0">
+				 	
+				 </if>
+				 <if test="stats != null and stats.size > 0">
+				 	and stat in
+				 	<foreach collection="stats" item="st" open="(" separator="," close=")">
+				 		#{st}
+				 	</foreach>
+				 </if>
+			</where>
+			GROUP BY zllb
+		)
+	</select>
+	
+	<select id="selectByZllb" resultType="com.yzl.pojo.YzlEpc">
+		SELECT * FROM yzl_epc 
+		WHERE mark IN(
+		SELECT DISTINCT GCLB FROM yzl_epc_task_progress
+		<where>
+			<if test="year != null and year != ''">
+				and zynd = #{year}
+			</if>
+			<if test="tcode != null and tcode != ''">
+			 	and ZLLB = #{tcode}
+			</if>
+			<if test="disCode != null and disCode != '' and disCode.length() == 2 and disCode != '45'">
+				and cityCode = (select distinct citycode from yzl_district where flag = #{disCode})
+			</if>
+			<if test="disCode != null and disCode.length() == 4 ">
+				and cityCode = #{disCode}
+			</if>
+			<if test="disCode != null and disCode != '' and disCode.length() >= 6">
+				and countyCode = #{disCode}
+			</if>
+			<if test="stats != null and stats.size > 0">
+				 	and stat in
+				 	<foreach collection="stats" item="st" open="(" separator="," close=")">
+				 		#{st}
+				 	</foreach>
+				 </if>
+		</where>
+		
+		)
+	</select>
+	
+	<select id="selectByCountyCountyTaskIssued" resultType="com.yzl.pojo.YzlEpcTaskProgress">
+		SELECT GCLB,ZLLB,cityCode,countyCode,ZYND,SUM(taskProgress) AS taskProgress,stat FROM yzl_epc_task_progress 
+		<where>
+			<if test="year != null and year != ''">
+				and ZYND = #{year}
+			</if>
+			<if test="disCode != null and disCode != '' and disCode.length() == 2 and disCode != 'GX450' and disCode != '45'">
+				and cityCode = (select distinct citycode from yzl_district where flag = #{disCode})
+			</if>
+			<if test="disCode.length() == 4 ">
+				and cityCode = #{disCode}
+			</if>
+			<if test="disCode != null and disCode != '' and disCode.length() >= 6 and disCode != 'GX450'">
+				and countyCode = #{disCode}
+			</if>
+			<if test="zllb != null and zllb != '' and zllb != 'null'">
+				and zllb = #{zllb}
+			</if>
+			<if test="proceed != 'null' and proceed != null and proceed != ''">
+				and zllb = #{proceed}
+			</if>
+			 <if test="stats != null and stats.size > 0">
+				 	and stat in
+				 	<foreach collection="stats" item="st" open="(" separator="," close=")">
+				 		#{st}
+				 	</foreach>
+				 </if>
+		</where>
+		GROUP BY GCLB,ZLLB,countyCode
+	</select>
+	
+	<select id="selectByCountyComplation" resultType="com.yzl.pojo.YzlXb">
+		SELECT city,county,GCLB,ZLLB,ZYND,JHND,SUM(XTJSBMJ) AS XTJSBMJ,stat FROM yzl_xb
+		<where>
+			<if test="year != null and year != ''">
+				ZYND = #{year}
+			</if>
+			<if test="stats != null and stats.size > 0">
+				AND stat IN
+				<foreach collection="stats" item="stat" open="(" separator="," close=")">
+					#{stat}
+				</foreach>
+				
+			</if>
+			<if test="menu.size == 1">
+				AND city =
+				<foreach collection="menu" item="m">
+					#{m}
+				</foreach>
+			</if>
+		</where>
+		GROUP BY GCLB,ZLLB,city,ZYND
+	</select>
+	
+	<!-- //改变任务下发的表头状态 -->
+	<update id="updateByEpcTaskTable">
+		UPDATE yzl_epc_task_progress 
+		SET stat = #{code}
+		<where>
+			<if test="zllb != null and zllb != ''">
+				and zllb = #{zllb}
+			</if>
+			<if test="county != null and county != ''">
+				AND countyCode = #{county}
+			</if>
+			<if test="ZYND != null and ZYND != ''">
+				AND ZYND = #{ZYND}
+			</if>
+			<if test="stats.size != null and stats.size > 0">
+				AND stat in
+				<foreach collection="stats" item="st" open="(" separator="," close=")">
+					#{st}
+				</foreach>
+			</if>
+		</where> 
+		   
+	</update>
+	
+	
+	<select id="queryDemo" resultType="com.yzl.pojo.YzlMessage">
+		SELECT city,county,GCLB,ZLLB,ZYND,JHND FROM yzl_xb having 1=1
+			<if test="message.zllb != null and message.zllb != ''">
+				and zllb = #{message.zllb}
+			</if>
+			<if test="message.countycode != null and message.countycode != ''">
+				AND county = #{message.countycode}
+			</if>
+			<if test="message.zynd != null and message.zynd != ''">
+				AND ZYND = #{message.zynd}
+			</if>
+			<if test="message.jhnd != null and message.jhnd != ''">
+				and JHND = #{message.jhnd}
+			</if>
+	</select>
+	
+	  <select id="queryXTJSBMJAndCityGroupByCity"  resultType="com.yzl.pojo.dto.TaskDTO">
+    	 SELECT d.city,xb.`city` as "aNumber" ,SUM(xb.`XTJSBMJ`) AS "taskNumber"
+		   	FROM `yzl_xb` xb left join yzl_district d on xb.COUNTY=d.Anumber
+   			   where xb.county in
+				<!-- 根据用户权限查询 -->
+				 <foreach collection="anumbers" item="anumber" open="(" close=")" separator="," >
+		               #{anumber}
+		          </foreach>
+		          <if test="year != null">
+		          	AND xb.ZYND = #{year}
+		          </if>
+		          <if test="statu != null and statu!=''">
+		           	  AND xb.stat =#{statu}
+		          </if>
+   					GROUP By xb.`city` 
+    </select>
+    
+    <select id="sumCityXTJSBMJ" resultType="double">
+				SELECT SUM(XTJSBMJ) FROM yzl_xb where stat=#{statu};
+	</select>
+    
+	<select id="queryXTJSBMJAndCountyByCityCode"  resultType="com.yzl.pojo.dto.TaskDTO">
+   		 SELECT d.county,xb.`county` as "aNumber",SUM(xb.XTJSBMJ) AS "taskNumber"  
+	 		FROM yzl_xb xb left join `yzl_district` d
+	 				on xb.COUNTY=d.Anumber
+				WHERE 
+				  	 xb.`COUNTY` IN 
+					<!-- 根据用户权限查询 -->
+					 <foreach collection="anumbers" item="anumber" open="(" close=")" separator="," >
+			               #{anumber}
+			          </foreach>
+			          <if test="year != null">
+			          	AND ZYND = #{year}
+			          </if>
+			          <if test="statu != null and statu !=''">
+			          	AND stat=${statu}
+			          </if>
+			          <if test="cityCode!=null and cityCode!=''">
+			          	 AND xb.`CITY`=#{cityCode}
+			          </if>
+   						GROUP BY xb.`county`
+    </select>
+	
+</mapper>

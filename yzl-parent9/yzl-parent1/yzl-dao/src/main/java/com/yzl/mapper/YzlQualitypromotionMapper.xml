@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzl.mapper.YzlQualitypromotionMapper" >
+
+    <resultMap id="BaseResultMap" type="com.yzl.pojo.YzlQualitypromotion" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="dcode" property="dcode" jdbcType="VARCHAR" />
+        <result column="ecode" property="ecode" jdbcType="VARCHAR" />
+        <result column="designArea" property="designarea" jdbcType="VARCHAR" />
+        <result column="IQR" property="iqr" jdbcType="VARCHAR" />
+        <result column="verifyAreaT" property="verifyareat" jdbcType="VARCHAR" />
+        <result column="verifyArea" property="verifyarea" jdbcType="VARCHAR" />
+        <result column="VQAT" property="vqat" jdbcType="VARCHAR" />
+        <result column="VQAQR" property="vqaqr" jdbcType="VARCHAR" />
+        <result column="nurtureAreaT" property="nurtureareat" jdbcType="VARCHAR" />
+        <result column="NANR" property="nanr" jdbcType="VARCHAR" />
+        <result column="manageAreaT" property="manageareat" jdbcType="VARCHAR" />
+        <result column="manageAreaMR" property="manageareamr" jdbcType="VARCHAR" />
+        <result column="euDesignArea" property="eudesignarea" jdbcType="VARCHAR" />
+        <result column="euIQR" property="euiqr" jdbcType="VARCHAR" />
+        <result column="euVerifyArea" property="euverifyarea" jdbcType="VARCHAR" />
+        <result column="euVQA" property="euvqa" jdbcType="VARCHAR" />
+        <result column="euNurtureArea" property="eunurturearea" jdbcType="VARCHAR" />
+        <result column="euManageArea" property="eumanagearea" jdbcType="VARCHAR" />
+        <result column="euVRQR" property="euvrqr" jdbcType="VARCHAR" />
+        <result column="euNurture" property="eunurture" jdbcType="VARCHAR" />
+        <result column="euManage" property="eumanage" jdbcType="VARCHAR" />
+        <result column="otDesignArea" property="otdesignarea" jdbcType="VARCHAR" />
+        <result column="otIQR" property="otiqr" jdbcType="VARCHAR" />
+        <result column="otVerifyArea" property="otverifyarea" jdbcType="VARCHAR" />
+        <result column="otVQA" property="otvqa" jdbcType="VARCHAR" />
+        <result column="otNurtureArea" property="otnurturearea" jdbcType="VARCHAR" />
+        <result column="otManageArea" property="otmanagearea" jdbcType="VARCHAR" />
+        <result column="otVRQR" property="otvrqr" jdbcType="VARCHAR" />
+        <result column="othNurture" property="othnurture" jdbcType="VARCHAR" />
+        <result column="otManage" property="otmanage" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, dcode, ecode, designArea, IQR, verifyAreaT, verifyArea, VQAT, VQAQR, nurtureAreaT, 
+        NANR, manageAreaT, manageAreaMR, euDesignArea, euIQR, euVerifyArea, euVQA, euNurtureArea, 
+        euManageArea, euVRQR, euNurture, euManage, otDesignArea, otIQR, otVerifyArea, otVQA, 
+        otNurtureArea, otManageArea, otVRQR, othNurture, otManage
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yzl.pojo.YzlQualitypromotionExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from yzl_qualitypromotion
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from yzl_qualitypromotion
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from yzl_qualitypromotion
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.yzl.pojo.YzlQualitypromotionExample" >
+        delete from yzl_qualitypromotion
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.yzl.pojo.YzlQualitypromotion" >
+        insert into yzl_qualitypromotion (id, dcode, ecode, 
+            designArea, IQR, verifyAreaT, 
+            verifyArea, VQAT, VQAQR, 
+            nurtureAreaT, NANR, manageAreaT, 
+            manageAreaMR, euDesignArea, euIQR, 
+            euVerifyArea, euVQA, euNurtureArea, 
+            euManageArea, euVRQR, euNurture, 
+            euManage, otDesignArea, otIQR, 
+            otVerifyArea, otVQA, otNurtureArea, 
+            otManageArea, otVRQR, othNurture, 
+            otManage)
+        values (#{id,jdbcType=BIGINT}, #{dcode,jdbcType=VARCHAR}, #{ecode,jdbcType=VARCHAR}, 
+            #{designarea,jdbcType=VARCHAR}, #{iqr,jdbcType=VARCHAR}, #{verifyareat,jdbcType=VARCHAR}, 
+            #{verifyarea,jdbcType=VARCHAR}, #{vqat,jdbcType=VARCHAR}, #{vqaqr,jdbcType=VARCHAR}, 
+            #{nurtureareat,jdbcType=VARCHAR}, #{nanr,jdbcType=VARCHAR}, #{manageareat,jdbcType=VARCHAR}, 
+            #{manageareamr,jdbcType=VARCHAR}, #{eudesignarea,jdbcType=VARCHAR}, #{euiqr,jdbcType=VARCHAR}, 
+            #{euverifyarea,jdbcType=VARCHAR}, #{euvqa,jdbcType=VARCHAR}, #{eunurturearea,jdbcType=VARCHAR}, 
+            #{eumanagearea,jdbcType=VARCHAR}, #{euvrqr,jdbcType=VARCHAR}, #{eunurture,jdbcType=VARCHAR}, 
+            #{eumanage,jdbcType=VARCHAR}, #{otdesignarea,jdbcType=VARCHAR}, #{otiqr,jdbcType=VARCHAR}, 
+            #{otverifyarea,jdbcType=VARCHAR}, #{otvqa,jdbcType=VARCHAR}, #{otnurturearea,jdbcType=VARCHAR}, 
+            #{otmanagearea,jdbcType=VARCHAR}, #{otvrqr,jdbcType=VARCHAR}, #{othnurture,jdbcType=VARCHAR}, 
+            #{otmanage,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.yzl.pojo.YzlQualitypromotion" >
+        insert into yzl_qualitypromotion
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="dcode != null" >
+                dcode,
+            </if>
+            <if test="ecode != null" >
+                ecode,
+            </if>
+            <if test="designarea != null" >
+                designArea,
+            </if>
+            <if test="iqr != null" >
+                IQR,
+            </if>
+            <if test="verifyareat != null" >
+                verifyAreaT,
+            </if>
+            <if test="verifyarea != null" >
+                verifyArea,
+            </if>
+            <if test="vqat != null" >
+                VQAT,
+            </if>
+            <if test="vqaqr != null" >
+                VQAQR,
+            </if>
+            <if test="nurtureareat != null" >
+                nurtureAreaT,
+            </if>
+            <if test="nanr != null" >
+                NANR,
+            </if>
+            <if test="manageareat != null" >
+                manageAreaT,
+            </if>
+            <if test="manageareamr != null" >
+                manageAreaMR,
+            </if>
+            <if test="eudesignarea != null" >
+                euDesignArea,
+            </if>
+            <if test="euiqr != null" >
+                euIQR,
+            </if>
+            <if test="euverifyarea != null" >
+                euVerifyArea,
+            </if>
+            <if test="euvqa != null" >
+                euVQA,
+            </if>
+            <if test="eunurturearea != null" >
+                euNurtureArea,
+            </if>
+            <if test="eumanagearea != null" >
+                euManageArea,
+            </if>
+            <if test="euvrqr != null" >
+                euVRQR,
+            </if>
+            <if test="eunurture != null" >
+                euNurture,
+            </if>
+            <if test="eumanage != null" >
+                euManage,
+            </if>
+            <if test="otdesignarea != null" >
+                otDesignArea,
+            </if>
+            <if test="otiqr != null" >
+                otIQR,
+            </if>
+            <if test="otverifyarea != null" >
+                otVerifyArea,
+            </if>
+            <if test="otvqa != null" >
+                otVQA,
+            </if>
+            <if test="otnurturearea != null" >
+                otNurtureArea,
+            </if>
+            <if test="otmanagearea != null" >
+                otManageArea,
+            </if>
+            <if test="otvrqr != null" >
+                otVRQR,
+            </if>
+            <if test="othnurture != null" >
+                othNurture,
+            </if>
+            <if test="otmanage != null" >
+                otManage,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="dcode != null" >
+                #{dcode,jdbcType=VARCHAR},
+            </if>
+            <if test="ecode != null" >
+                #{ecode,jdbcType=VARCHAR},
+            </if>
+            <if test="designarea != null" >
+                #{designarea,jdbcType=VARCHAR},
+            </if>
+            <if test="iqr != null" >
+                #{iqr,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyareat != null" >
+                #{verifyareat,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyarea != null" >
+                #{verifyarea,jdbcType=VARCHAR},
+            </if>
+            <if test="vqat != null" >
+                #{vqat,jdbcType=VARCHAR},
+            </if>
+            <if test="vqaqr != null" >
+                #{vqaqr,jdbcType=VARCHAR},
+            </if>
+            <if test="nurtureareat != null" >
+                #{nurtureareat,jdbcType=VARCHAR},
+            </if>
+            <if test="nanr != null" >
+                #{nanr,jdbcType=VARCHAR},
+            </if>
+            <if test="manageareat != null" >
+                #{manageareat,jdbcType=VARCHAR},
+            </if>
+            <if test="manageareamr != null" >
+                #{manageareamr,jdbcType=VARCHAR},
+            </if>
+            <if test="eudesignarea != null" >
+                #{eudesignarea,jdbcType=VARCHAR},
+            </if>
+            <if test="euiqr != null" >
+                #{euiqr,jdbcType=VARCHAR},
+            </if>
+            <if test="euverifyarea != null" >
+                #{euverifyarea,jdbcType=VARCHAR},
+            </if>
+            <if test="euvqa != null" >
+                #{euvqa,jdbcType=VARCHAR},
+            </if>
+            <if test="eunurturearea != null" >
+                #{eunurturearea,jdbcType=VARCHAR},
+            </if>
+            <if test="eumanagearea != null" >
+                #{eumanagearea,jdbcType=VARCHAR},
+            </if>
+            <if test="euvrqr != null" >
+                #{euvrqr,jdbcType=VARCHAR},
+            </if>
+            <if test="eunurture != null" >
+                #{eunurture,jdbcType=VARCHAR},
+            </if>
+            <if test="eumanage != null" >
+                #{eumanage,jdbcType=VARCHAR},
+            </if>
+            <if test="otdesignarea != null" >
+                #{otdesignarea,jdbcType=VARCHAR},
+            </if>
+            <if test="otiqr != null" >
+                #{otiqr,jdbcType=VARCHAR},
+            </if>
+            <if test="otverifyarea != null" >
+                #{otverifyarea,jdbcType=VARCHAR},
+            </if>
+            <if test="otvqa != null" >
+                #{otvqa,jdbcType=VARCHAR},
+            </if>
+            <if test="otnurturearea != null" >
+                #{otnurturearea,jdbcType=VARCHAR},
+            </if>
+            <if test="otmanagearea != null" >
+                #{otmanagearea,jdbcType=VARCHAR},
+            </if>
+            <if test="otvrqr != null" >
+                #{otvrqr,jdbcType=VARCHAR},
+            </if>
+            <if test="othnurture != null" >
+                #{othnurture,jdbcType=VARCHAR},
+            </if>
+            <if test="otmanage != null" >
+                #{otmanage,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.yzl.pojo.YzlQualitypromotionExample" resultType="java.lang.Integer" >
+        select count(*) from yzl_qualitypromotion
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update yzl_qualitypromotion
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.dcode != null" >
+                dcode = #{record.dcode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ecode != null" >
+                ecode = #{record.ecode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.designarea != null" >
+                designArea = #{record.designarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.iqr != null" >
+                IQR = #{record.iqr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.verifyareat != null" >
+                verifyAreaT = #{record.verifyareat,jdbcType=VARCHAR},
+            </if>
+            <if test="record.verifyarea != null" >
+                verifyArea = #{record.verifyarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vqat != null" >
+                VQAT = #{record.vqat,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vqaqr != null" >
+                VQAQR = #{record.vqaqr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nurtureareat != null" >
+                nurtureAreaT = #{record.nurtureareat,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nanr != null" >
+                NANR = #{record.nanr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.manageareat != null" >
+                manageAreaT = #{record.manageareat,jdbcType=VARCHAR},
+            </if>
+            <if test="record.manageareamr != null" >
+                manageAreaMR = #{record.manageareamr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.eudesignarea != null" >
+                euDesignArea = #{record.eudesignarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.euiqr != null" >
+                euIQR = #{record.euiqr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.euverifyarea != null" >
+                euVerifyArea = #{record.euverifyarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.euvqa != null" >
+                euVQA = #{record.euvqa,jdbcType=VARCHAR},
+            </if>
+            <if test="record.eunurturearea != null" >
+                euNurtureArea = #{record.eunurturearea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.eumanagearea != null" >
+                euManageArea = #{record.eumanagearea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.euvrqr != null" >
+                euVRQR = #{record.euvrqr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.eunurture != null" >
+                euNurture = #{record.eunurture,jdbcType=VARCHAR},
+            </if>
+            <if test="record.eumanage != null" >
+                euManage = #{record.eumanage,jdbcType=VARCHAR},
+            </if>
+            <if test="record.otdesignarea != null" >
+                otDesignArea = #{record.otdesignarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.otiqr != null" >
+                otIQR = #{record.otiqr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.otverifyarea != null" >
+                otVerifyArea = #{record.otverifyarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.otvqa != null" >
+                otVQA = #{record.otvqa,jdbcType=VARCHAR},
+            </if>
+            <if test="record.otnurturearea != null" >
+                otNurtureArea = #{record.otnurturearea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.otmanagearea != null" >
+                otManageArea = #{record.otmanagearea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.otvrqr != null" >
+                otVRQR = #{record.otvrqr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.othnurture != null" >
+                othNurture = #{record.othnurture,jdbcType=VARCHAR},
+            </if>
+            <if test="record.otmanage != null" >
+                otManage = #{record.otmanage,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update yzl_qualitypromotion
+        set id = #{record.id,jdbcType=BIGINT},
+            dcode = #{record.dcode,jdbcType=VARCHAR},
+            ecode = #{record.ecode,jdbcType=VARCHAR},
+            designArea = #{record.designarea,jdbcType=VARCHAR},
+            IQR = #{record.iqr,jdbcType=VARCHAR},
+            verifyAreaT = #{record.verifyareat,jdbcType=VARCHAR},
+            verifyArea = #{record.verifyarea,jdbcType=VARCHAR},
+            VQAT = #{record.vqat,jdbcType=VARCHAR},
+            VQAQR = #{record.vqaqr,jdbcType=VARCHAR},
+            nurtureAreaT = #{record.nurtureareat,jdbcType=VARCHAR},
+            NANR = #{record.nanr,jdbcType=VARCHAR},
+            manageAreaT = #{record.manageareat,jdbcType=VARCHAR},
+            manageAreaMR = #{record.manageareamr,jdbcType=VARCHAR},
+            euDesignArea = #{record.eudesignarea,jdbcType=VARCHAR},
+            euIQR = #{record.euiqr,jdbcType=VARCHAR},
+            euVerifyArea = #{record.euverifyarea,jdbcType=VARCHAR},
+            euVQA = #{record.euvqa,jdbcType=VARCHAR},
+            euNurtureArea = #{record.eunurturearea,jdbcType=VARCHAR},
+            euManageArea = #{record.eumanagearea,jdbcType=VARCHAR},
+            euVRQR = #{record.euvrqr,jdbcType=VARCHAR},
+            euNurture = #{record.eunurture,jdbcType=VARCHAR},
+            euManage = #{record.eumanage,jdbcType=VARCHAR},
+            otDesignArea = #{record.otdesignarea,jdbcType=VARCHAR},
+            otIQR = #{record.otiqr,jdbcType=VARCHAR},
+            otVerifyArea = #{record.otverifyarea,jdbcType=VARCHAR},
+            otVQA = #{record.otvqa,jdbcType=VARCHAR},
+            otNurtureArea = #{record.otnurturearea,jdbcType=VARCHAR},
+            otManageArea = #{record.otmanagearea,jdbcType=VARCHAR},
+            otVRQR = #{record.otvrqr,jdbcType=VARCHAR},
+            othNurture = #{record.othnurture,jdbcType=VARCHAR},
+            otManage = #{record.otmanage,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.yzl.pojo.YzlQualitypromotion" >
+        update yzl_qualitypromotion
+        <set >
+            <if test="dcode != null" >
+                dcode = #{dcode,jdbcType=VARCHAR},
+            </if>
+            <if test="ecode != null" >
+                ecode = #{ecode,jdbcType=VARCHAR},
+            </if>
+            <if test="designarea != null" >
+                designArea = #{designarea,jdbcType=VARCHAR},
+            </if>
+            <if test="iqr != null" >
+                IQR = #{iqr,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyareat != null" >
+                verifyAreaT = #{verifyareat,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyarea != null" >
+                verifyArea = #{verifyarea,jdbcType=VARCHAR},
+            </if>
+            <if test="vqat != null" >
+                VQAT = #{vqat,jdbcType=VARCHAR},
+            </if>
+            <if test="vqaqr != null" >
+                VQAQR = #{vqaqr,jdbcType=VARCHAR},
+            </if>
+            <if test="nurtureareat != null" >
+                nurtureAreaT = #{nurtureareat,jdbcType=VARCHAR},
+            </if>
+            <if test="nanr != null" >
+                NANR = #{nanr,jdbcType=VARCHAR},
+            </if>
+            <if test="manageareat != null" >
+                manageAreaT = #{manageareat,jdbcType=VARCHAR},
+            </if>
+            <if test="manageareamr != null" >
+                manageAreaMR = #{manageareamr,jdbcType=VARCHAR},
+            </if>
+            <if test="eudesignarea != null" >
+                euDesignArea = #{eudesignarea,jdbcType=VARCHAR},
+            </if>
+            <if test="euiqr != null" >
+                euIQR = #{euiqr,jdbcType=VARCHAR},
+            </if>
+            <if test="euverifyarea != null" >
+                euVerifyArea = #{euverifyarea,jdbcType=VARCHAR},
+            </if>
+            <if test="euvqa != null" >
+                euVQA = #{euvqa,jdbcType=VARCHAR},
+            </if>
+            <if test="eunurturearea != null" >
+                euNurtureArea = #{eunurturearea,jdbcType=VARCHAR},
+            </if>
+            <if test="eumanagearea != null" >
+                euManageArea = #{eumanagearea,jdbcType=VARCHAR},
+            </if>
+            <if test="euvrqr != null" >
+                euVRQR = #{euvrqr,jdbcType=VARCHAR},
+            </if>
+            <if test="eunurture != null" >
+                euNurture = #{eunurture,jdbcType=VARCHAR},
+            </if>
+            <if test="eumanage != null" >
+                euManage = #{eumanage,jdbcType=VARCHAR},
+            </if>
+            <if test="otdesignarea != null" >
+                otDesignArea = #{otdesignarea,jdbcType=VARCHAR},
+            </if>
+            <if test="otiqr != null" >
+                otIQR = #{otiqr,jdbcType=VARCHAR},
+            </if>
+            <if test="otverifyarea != null" >
+                otVerifyArea = #{otverifyarea,jdbcType=VARCHAR},
+            </if>
+            <if test="otvqa != null" >
+                otVQA = #{otvqa,jdbcType=VARCHAR},
+            </if>
+            <if test="otnurturearea != null" >
+                otNurtureArea = #{otnurturearea,jdbcType=VARCHAR},
+            </if>
+            <if test="otmanagearea != null" >
+                otManageArea = #{otmanagearea,jdbcType=VARCHAR},
+            </if>
+            <if test="otvrqr != null" >
+                otVRQR = #{otvrqr,jdbcType=VARCHAR},
+            </if>
+            <if test="othnurture != null" >
+                othNurture = #{othnurture,jdbcType=VARCHAR},
+            </if>
+            <if test="otmanage != null" >
+                otManage = #{otmanage,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.yzl.pojo.YzlQualitypromotion" >
+        update yzl_qualitypromotion
+        set dcode = #{dcode,jdbcType=VARCHAR},
+            ecode = #{ecode,jdbcType=VARCHAR},
+            designArea = #{designarea,jdbcType=VARCHAR},
+            IQR = #{iqr,jdbcType=VARCHAR},
+            verifyAreaT = #{verifyareat,jdbcType=VARCHAR},
+            verifyArea = #{verifyarea,jdbcType=VARCHAR},
+            VQAT = #{vqat,jdbcType=VARCHAR},
+            VQAQR = #{vqaqr,jdbcType=VARCHAR},
+            nurtureAreaT = #{nurtureareat,jdbcType=VARCHAR},
+            NANR = #{nanr,jdbcType=VARCHAR},
+            manageAreaT = #{manageareat,jdbcType=VARCHAR},
+            manageAreaMR = #{manageareamr,jdbcType=VARCHAR},
+            euDesignArea = #{eudesignarea,jdbcType=VARCHAR},
+            euIQR = #{euiqr,jdbcType=VARCHAR},
+            euVerifyArea = #{euverifyarea,jdbcType=VARCHAR},
+            euVQA = #{euvqa,jdbcType=VARCHAR},
+            euNurtureArea = #{eunurturearea,jdbcType=VARCHAR},
+            euManageArea = #{eumanagearea,jdbcType=VARCHAR},
+            euVRQR = #{euvrqr,jdbcType=VARCHAR},
+            euNurture = #{eunurture,jdbcType=VARCHAR},
+            euManage = #{eumanage,jdbcType=VARCHAR},
+            otDesignArea = #{otdesignarea,jdbcType=VARCHAR},
+            otIQR = #{otiqr,jdbcType=VARCHAR},
+            otVerifyArea = #{otverifyarea,jdbcType=VARCHAR},
+            otVQA = #{otvqa,jdbcType=VARCHAR},
+            otNurtureArea = #{otnurturearea,jdbcType=VARCHAR},
+            otManageArea = #{otmanagearea,jdbcType=VARCHAR},
+            otVRQR = #{otvrqr,jdbcType=VARCHAR},
+            othNurture = #{othnurture,jdbcType=VARCHAR},
+            otManage = #{otmanage,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

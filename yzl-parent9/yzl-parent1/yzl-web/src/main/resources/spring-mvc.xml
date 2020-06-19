@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+	http://www.springframework.org/schema/cache
+    http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+	<!-- 对静态资源的访问 -->
+	<mvc:resources mapping="/js/**" location="/js/" /> 
+	<mvc:resources mapping="/css/**" location="/css/" />
+
+	<!-- 开启aop注解 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+	<context:component-scan base-package="com.yzl.*Controller"/>
+
+	<!-- 添加注解驱动 -->
+	<mvc:annotation-driven/>
+
+	
+	
+	<!-- 允许对静态资源文件的访问 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 可以省去.jsp -->
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 默认编码 -->
+		<property name="defaultEncoding" value="UTF-8" />
+		<!-- 文件大小最大值 -->
+		<property name="maxUploadSize" value="10485760000" />
+		<!-- 内存中的最大值 -->
+		<property name="maxInMemorySize" value="40960" />
+	</bean>
+	
+	<!-- springmvc的拦截器配置 -->
+ <!-- 	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>拦截所有的请求
+			<mvc:exclude-mapping path="/user/login"/>知道不拦截的地址
+			<bean class="com.yzl.interceptor.LoginInterceptor"></bean>拦截器的地址
+			<bean class="com.yzl.interceptor.LoginFilter"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>  -->
+	
+	
+	<!-- spring自带的缓存 -->
+	<cache:annotation-driven cache-manager="cacheManager" />
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+    	<property name="caches">
+    		<set>
+    			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+    				<property name="name" value="default"></property>
+    			</bean>
+    			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+    				<property name="name" value="moniCache"></property>
+    			</bean>
+    			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+    				<property name="name" value="cityCache"></property>
+    			</bean>
+    			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+    				<property name="name" value="countyCache"></property>
+    			</bean>
+    			<!-- 任务工作中 -->
+    			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+    				<property name="name" value="taskWork"></property>
+    			</bean>
+    			<!-- 任务完成 -->
+    			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+    				<property name="name" value="completionWorkEpcTaskData"></property>
+    			</bean>
+    			<!-- 任务完成 -->
+    			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+    				<property name="name" value="completionWorktb"></property>
+    			</bean>
+    			<!-- 任务下发 -->
+    			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+    				<property name="name" value="TaskIssuedWork"></property>
+    			</bean>
+    			<!-- <bean class="com.yzl.LogService.SpringCacheKeyGenret">
+    				<property name="name" value="xxx"></property>
+    			</bean> -->
+    		</set>
+    	</property>
+    </bean> 
+    
+
+</beans>

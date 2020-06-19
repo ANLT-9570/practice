@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dg.main.dao.orders.UserBalanceMapper">
+
+	<resultMap id="BaseResultMap" type="com.dg.main.Entity.users.UserBalance" >
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="money" property="money" jdbcType="BIGINT" />
+		<result column="platform_money" property="platformMoney" jdbcType="BIGINT" />
+		<result column="operation_times" property="operationTimes" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" />
+		<result column="modify_time" property="modifyTime"  />
+
+	</resultMap>
+
+    <select id="selectCount" resultType="int">
+		SELECT count(*) FROM user_balance
+	</select>
+
+    <!-- 分页 -->
+    <select id="selectPageAll" resultType="com.dg.main.Entity.users.UserBalance">
+		select top #{limit} * from user_balance
+		where id not in(select top #{offset} id from user_balance)
+	</select>
+	<select id="topPlatmoney" resultType="com.dg.main.Entity.users.UserBalance">
+		select top ${limit} * from user_balance order by platform_money desc
+	</select>
+	<select id="findByUserId" parameterType="int" resultMap="BaseResultMap">
+		select * from user_balance   where user_id =#{userId} for update
+	</select>
+    <insert id="save" parameterType="com.dg.main.Entity.users.UserBalance">
+		insert into user_balance(user_id,money,platform_money,operation_times,create_time,modify_time)
+		values(#{userId},#{money},#{platformMoney},#{operationTimes},#{createTime},#{modifyTime});
+	</insert>
+
+    <select id="selectOne" parameterType="int" resultType="com.dg.main.Entity.users.UserBalance">
+		SELECT * FROM user_balance  where id = #{id} for update
+	</select>
+	<select id="selectOneWithNoLock"  resultMap="BaseResultMap">
+        SELECT * FROM user_balance  where id = #{id}
+	</select>
+	<select id="findByUserIdWithNoLock"  resultMap="BaseResultMap">
+		select * from user_balance   where user_id =#{userId}
+	</select>
+    <delete id="deleteAllId">
+        delete from user_balance where id in
+        <foreach collection="t" item="u" open="(" separator="," close=")">
+            ${u}
+        </foreach>
+    </delete>
+
+    <update id="update" parameterType="com.dg.main.Entity.users.UserBalance">
+		update user_balance
+		set money =#{t.money},platform_money=#{t.platformMoney},operation_times=#{t.operationTimes},modify_time=#{t.modifyTime}
+		where id='${t.id}'
+	</update>
+	<update id="increaseVersionUpdateMoney" >
+		update user_balance
+		set operation_times=operation_times+1,money=money+#{money},modify_time=now()
+		where id=#{id} and operation_times=#{operationTimes}
+	</update>
+	<update id="increaseVersionUpdatePlatformMoney" >
+		update user_balance
+		set operation_times=operation_times+1,platform_money=platform_money+#{PlatformMoney},modify_time=now()
+		where id=#{id} and operation_times=#{operationTimes}
+	</update>
+
+	<update id="decreaseVersionUpdateMoney" >
+		update user_balance
+		set operation_times=operation_times+1,money=money-#{money},modify_time=now()
+		where id=#{id} and operation_times=#{operationTimes}
+	</update>
+	<update id="decreaseVersionUpdatePlatformMoney" >
+		update user_balance
+		set operation_times=operation_times+1,platform_money=platform_money-#{PlatformMoney},modify_time=now()
+
+		where id=#{id} and operation_times=#{operationTimes}
+	</update>
+    <update id="transToPlatform">
+        update user_balance
+        set operation_times=operation_times+1,money=money-#{money},platform_money=platform_money+#{platformMoney},modify_time=now()
+        where id=#{id} and operation_times=#{operationTimes}
+    </update>
+	<select id="findBy" parameterType="long" resultType="com.dg.main.Entity.users.UserBalance">
+		select * from user_balance where id = #{id} for update
+	</select>
+	<delete id="deleteBy" parameterType="long">
+		delete from user_balance where  id = #{id}
+	</delete>
+</mapper>

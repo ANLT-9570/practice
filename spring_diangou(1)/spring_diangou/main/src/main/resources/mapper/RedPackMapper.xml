@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dg.main.dao.orders.RedPackMapper">
+    <select id="selectCount" resultType="int">
+		SELECT count(*) FROM [red_pack]
+	</select>
+	<resultMap type="com.dg.main.Entity.orders.RedPack" id="BaseResultMap">
+		<result property="id" column="id" jdbcType="BIGINT"/>
+		<result property="userId" column="user_id"/>
+		<result property="platformMoney" column="platform_money" jdbcType="BIGINT"/>
+		<result property="shopId" column="shop_id" jdbcType="BIGINT" />
+		<result property="code" column="code"/>
+		<result property="version" column="version"/>
+		<result property="createTime" column="create_time"/>
+		<result property="modified" column="modified"/>
+
+		<result property="sendTime" column="send_time"/>
+		<result property="isTaked" column="is_taked"/>
+		<result property="takeNumber" column="take_number"/>
+
+		<result property="schedulerTime" column="scheduler_time"/>
+		<result property="userTaked" column="user_taked"/>
+		<result property="generatedNumbers" column="generated_numbers"/>
+		<result property="leftMoney" column="left_money"/>
+
+	</resultMap>
+	<resultMap type="com.dg.main.vo.RedPackVo" id="vo">
+		<result property="id" column="id" jdbcType="BIGINT"/>
+		<result property="userId" column="user_id"/>
+		<result property="platformMoney" column="platform_money" jdbcType="BIGINT"/>
+		<result property="shopId" column="shop_id" jdbcType="BIGINT" />
+		<result property="code" column="code"/>
+		<result property="version" column="version"/>
+		<result property="createTime" column="create_time"/>
+		<result property="modified" column="modified"/>
+		<result property="takeMoney" column="take_money"/>
+
+
+	</resultMap>
+	<!-- 分页 -->
+	<select id="selectPageAll" resultType="com.dg.main.Entity.orders.RedPack">
+		select * from red_pack ORDER BY id  LIMIT #{limit} OFFSET ${offset};
+	</select>
+
+    <insert id="save" parameterType="com.dg.main.Entity.orders.RedPack">
+		insert into red_pack(user_id,platform_money,shop_id,code,version,create_time,modified
+		,send_time,is_taked,take_number,scheduler_time,user_taked,generated_numbers,left_money)
+		values(#{userId},#{platformMoney},#{shopId},#{code},#{version},#{createTime},#{modified},#{sendTime}
+		,#{isTaked},#{takeNumber},#{schedulerTime},#{userTaked},#{generatedNumbers},#{leftMoney});
+	</insert>
+
+    <select id="selectOne" parameterType="int" resultType="com.dg.main.Entity.orders.RedPack">
+		SELECT * FROM red_pack where id = #{id}
+	</select>
+
+    <delete id="deleteAllId">
+        delete from red_pack where id in
+        <foreach collection="t" item="u" open="(" separator="," close=")">
+            ${u}
+        </foreach>
+    </delete>
+	<select id="isSend" resultMap="BaseResultMap">
+		select * from red_pack where now() between create_time and send_time and user_id =#{userId} and left_money!=0
+	</select>
+	<select id="isSendv1" resultMap="BaseResultMap">
+		<!-- select * from red_pack where now() between create_time and send_time-1 and user_id =#{userId} and left_money!=0 -->
+		select * from red_pack where now() between create_time and send_time> (select ADDDATE(now(),interval 1 minute)) and user_id =#{userId} and left_money!=0
+		
+	</select>
+
+    <update id="update" parameterType="com.dg.main.Entity.orders.RedPack">
+		update red_pack
+		set create_time = #{t.createTime},platform_money = #{t.platformMoney},version = #{t.version}
+		,modified = #{t.modified},is_taked = #{t.isTaked},send_time = #{t.sendTime}
+		,scheduler_time = #{t.schedulerTime},user_taked = #{t.userTaked},generated_numbers = #{t.generatedNumbers},left_money = #{t.leftMoney}
+		where id=#{t.id}
+	</update>
+    <select id="findBy" parameterType="long" resultMap="BaseResultMap">
+		select * from red_pack  where id = #{id}
+	</select>
+	<select id="schedulerList" resultMap="BaseResultMap">
+	   select * from red_pack where  now() &gt; scheduler_time and left_money!=0;
+	</select>
+	<select id="shopList" resultMap="BaseResultMap">
+		select * from red_pack where user_id=#{userId} and user_taked  &lt; take_number
+	</select>
+	<select id="findByUid" parameterType="long" resultMap="BaseResultMap">
+		select * FROM red_pack where create_time = (
+  		select MAX(create_time)  FROM red_pack where user_id = #{arg0})
+	</select>
+    <delete id="deleteBy" parameterType="long">
+		delete from red_pack where  id = #{id}
+	</delete>
+	
+	<select id="tokizaneRedPack" resultMap="vo">
+		 select * from red_pack r
+		 join red_pack_log l
+		 on r.code = l.redPackCode
+		 and TO_DAYS(send_time)=TO_DAYS(now())
+		 
+	</select>
+	<select id="countUserMoney" resultType="long">
+		select sum(platform_money) from red_pack where user_id=#{userId};
+	</select>
+	<select id="countTodaySendRedpack" resultType="long">
+		select SUM(platform_money) as money from red_pack where user_id=#{userId} and date_format(now(),'%Y-%m-%d') = date_format(create_time,'%Y-%m-%d')
+	</select>
+</mapper>

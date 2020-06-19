@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dg.main.dao.UserMapper">
+
+	<select id="findUserbyNameAndPwd" resultType="com.dg.main.Entity.User">
+		<!-- select * from student where name=#{name} and age=#{age} -->
+		select * from sys_user where account=#{username} and password=#{password}
+	</select>
+	
+	<select id="findUserbyName" parameterType="String" resultType="com.dg.main.Entity.User">
+		select * from sys_user where name=#{name}
+	</select>
+	
+	<select id="findByUsername"  resultType="com.dg.main.Entity.User">
+		
+		SELECT * FROM sys_user WHERE account=#{username}
+		
+	</select>
+
+	<select id="selectAllUser" resultType="com.dg.main.Entity.User">
+
+		select * from sys_user  where 1=1
+
+		<if test="search != null ">
+			<bind name="search" value="'%' + search + '%'"/>
+			and account like #{search} or phone like #{search} or name like #{search}
+		</if>
+		ORDER BY id  LIMIT #{limit} OFFSET ${offset}
+	</select>
+
+	<select id="selectCounty" resultType="long">
+		SELECT count(*) FROM sys_user
+		<where>
+			<if test="search != null " >
+				<bind name="search" value="'%' + search + '%'"/>
+				and account like #{search} or phone like #{search} or name like #{search}
+			</if>
+		</where>
+
+	</select>
+	
+	<insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_user(account,password,name,sex,email,phone,status,createtime)
+		values(#{account},#{password},#{name},#{sex},#{email},#{phone},#{status},#{createtime});
+	</insert>
+	
+	<select id="findAllRole" resultType="com.dg.main.Entity.Tree">
+		SELECT id as id,name as name FROM sys_user
+	</select>
+	
+	<delete id="delUserRole">
+		delete from sys_user where userid = #{uid}
+	</delete>
+	
+	<insert id="addUserRole">
+		insert into sys_user(userid,roleid) values
+		<if test="rids.length > 0">
+			<foreach collection="rids" item="rid"  separator="," >
+				(#{uid},#{rid})
+			</foreach>
+		</if>
+	</insert>
+
+	<!-- 不是菜单 -->
+	<select id="findByMen" resultType="com.dg.main.Entity.Menu">
+		select * from sys_menu where id in(
+		select menuid from sys_menu_role where roleid in (
+		select roleid from sys_user_role
+		<if test="id != null and id != 0">
+			where userid = #{id}
+		</if>
+		))
+		<if test="code != null">
+			and ismenu = #{code}
+		</if>
+		order by num asc
+	</select>
+
+	<!-- 主菜单 -->
+	<select id="findByMainMen" resultType="com.dg.main.Entity.Menu">
+		select * from sys_menu where id in(
+		select menuid from sys_menu_role where roleid in (
+		select roleid from sys_user_role
+		<if test="id != null and id != 0">
+			where userid = #{id}
+		</if>
+		))
+		<if test="code != null">
+			and ismenu = #{code}
+		</if>
+	</select>
+
+	<select id="selectByUserRole" resultType="com.dg.main.Entity.Tree">
+		select id as id,name as name from sys_role where id in(
+		select roleid from sys_user_role where userid = #{id})
+	</select>
+
+	<delete id="delUser">
+		delete from sys_user where id in
+		<foreach collection="uids" item="u" open="(" separator="," close=")">
+			#{u}
+		</foreach>
+	</delete>
+
+	<update id="update">
+		update sys_user
+		set name=#{name},account = #{account},password=#{password},sex=#{sex},email=#{email},phone=#{phone},status=#{status}
+		where id = #{id}
+	</update>
+	
+	
+</mapper> 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dg.main.dao.RoleMapper">
+
+	<select id="findAllRole" resultType="com.dg.main.Entity.Role">
+		select * from sys_role  where 1=1
+		<if test="search != null ">
+			<bind name="search" value="'%' + search + '%'"/>
+			and name like #{search}
+		</if>
+		ORDER BY id  LIMIT #{limit} OFFSET ${offset}
+	</select>
+
+	<select id="selectCounty" resultType="long">
+		SELECT count(*) FROM sys_role
+		<where>
+			<if test="search != null " >
+				<bind name="search" value="'%' + search + '%'"/>
+				and name like #{search}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectByRoleName" resultType="com.dg.main.Entity.Role">
+		select * from sys_role where name=#{name}
+	</select>
+
+	<insert id="addRole" parameterType="com.dg.main.Entity.Role">
+		insert into sys_role(num,pid,name,description) values(#{num},#{pid},#{name},#{description});
+	</insert>
+
+	<delete id="delRole">
+		delete from sys_role where id in
+		<if test="rids.length > 0">
+			<foreach collection="rids" item="m" open="(" separator="," close=")">
+				#{m}
+			</foreach>
+		</if>
+	</delete>
+	
+	<select id="selectByMenu" resultType="com.dg.main.Entity.Tree">
+		select id as id ,code as code,pcode as pid,name as name from sys_menu where id in (
+			select menuid from sys_menu_role where roleid = #{id}) and ismenu = #{code} order by num asc
+	</select>
+	
+	<delete id="delRoleMenu">
+		delete from sys_menu_role where roleid in
+		<if test="rids.length > 0">
+			<foreach collection="rids" item="m" open="(" separator="," close=")">
+				#{m}
+			</foreach>
+		</if>
+	</delete>
+	
+</mapper>

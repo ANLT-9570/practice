@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:cache="http://www.springframework.org/schema/cache"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                        http://www.springframework.org/schema/tx
+                        http://www.springframework.org/schema/tx/spring-tx.xsd
+                        http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+                        http://www.springframework.org/schema/context  
+                        http://www.springframework.org/schema/context/spring-context-4.0.xsd  
+                        http://www.springframework.org/schema/mvc  
+                        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+                        http://www.springframework.org/schema/cache
+     					http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+
+  
+    <!-- 组件自动扫描 -->
+    <context:component-scan base-package="com.yzl.*Service"/>
+	<!-- 开启aop注解 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+    <!-- 引入配置文件 -->
+    <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties" />
+    </bean>  
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" /> 
+
+<!-- 			 <context:property-placeholder location="classpath:*tt.properties" /> -->
+	<!-- 添加注解驱动 -->
+	<mvc:annotation-driven/>
+
+	<!-- 配置数据源 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${jdbc.initialSize}"></property>
+        <!-- 连接池最大数量 -->
+        <property name="maxActive" value="${jdbc.maxActive}"></property>
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle" value="${jdbc.maxIdle}"></property>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${jdbc.minIdle}"></property>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${jdbc.maxWait}"></property>
+        <property  name="validationQuery"  value="${jdbc.validationQuery}"  />
+		<property  name="testWhileIdle"  value="${jdbc.testWhileIdle}"  />
+		<property  name="testOnBorrow"  value="${jdbc.testOnBorrow}"  />
+		<property  name="testOnReturn"  value="${jdbc.testOnReturn}"  />
+    </bean>
+
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- 自动扫描mapper.xml文件 -->
+        <property name="configLocation" value="classpath:SqlMapConfig.xml" />
+        <property name="mapperLocations" value="classpath:com/yzl/mapper/*.xml"/>
+    </bean>
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.yzl.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    
+    
+    <!-- 开启事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+   
+   <!-- 自定义shiro的filter -->
+   <!-- <bean id="LoginFilter" class="com.yzl.interceptor.LoginFilter"></bean> -->
+   
+   <!-- sessionDao可以实现唯一登录 -->
+   <!-- <bean id="sessionDao" class="org.apache.shiro.session.mgt.eis.MemorySessionDAO"/> -->
+   
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+    	<property name="securityManager" ref="securityManager"></property>
+    	<!-- 指定登录页面 -->
+    	<property name="loginUrl" value="/login.jsp"></property>
+    	<!-- 认证成功后跳转的页面 -->
+    	<!-- <property name="successUrl" value="/index.jsp"></property> -->
+     	<!-- 认证失败后跳转的页面 -->
+    	<property name="unauthorizedUrl" value="/unauthorized.jsp"></property>
+   		<!-- 指定url级别拦截策略 -->
+   		<property name="filterChainDefinitions">
+   			<value>
+   				<!-- anon指定为不拦截的 -->
+   				/css/** = anon
+   				/js/** = anon
+   				/images/** = anon
+   				/css/** = anon
+   				/assets/** = anon
+   				/login.jsp*/ = anon
+   				/user/login = anon
+   				/addDataPush = anon
+   				<!-- 拦截上面不匹配的所有URL -->
+   				/* = authc
+   			</value>
+   		</property>
+   		<!-- <property name="filters">
+   			<map>
+   				<entry key="LoginFilter" value-ref="LoginFilter"></entry>
+   			</map>
+   		</property> -->
+    </bean>
+    
+    <!-- 注册自定义 realm -->
+	<bean id="bosRealm" class="com.yzl.adminService.BOSRealm"></bean>
+    
+    <!-- 安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="bosRealm"></property>
+		<property name="cacheManager" ref="cacheManager"/> 
+		<!-- 会话管理 -->
+     	<property name="sessionManager" ref="sessionManager"/>
+     	<property name="sessionMode" value="native"></property>
+	</bean>   
+	
+	
+	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+    
+    
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+    	<!-- <property name="sessionDAO" ref="sessionDao"></property> -->
+    	<!-- session的失效时长，单位毫秒 -->
+    	<!-- <property name="globalSessionTimeout" value="4800000"/> -->
+    	<!-- 删除失效的session -->
+    	<property name="deleteInvalidSessions" value="true"/>
+    	<!-- <property name="sessionIdCookie">
+            <bean class="org.apache.shiro.web.servlet.SimpleCookie">
+                <property name="name" value="wms.session.id" />
+            </bean>
+        </property> -->
+       <!-- <property name="sessionIdCookie" ref="asd"></property> -->
+    </bean>
+    
+    <!-- <bean id="asd" class="org.apache.shiro.web.servlet.SimpleCookie">
+    	<property name="name" value="wms.session.id" />
+    </bean> -->
+    
+    <!-- <bean class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" p:hostName="47.98.175.75" p:port="6379">
+    	<property name=""></property>
+    </bean>
+    
+    <bean  class="redis.clients.jedis.JedisPool">
+    	<constructor-arg name="host" value="${redis.host}"/>
+        <constructor-arg name="port" value="${redis.port}"/>
+    </bean> -->
+    
+      
+  
+    <!-- <cache:annotation-driven/> -->
+    <!-- <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+    	<property name="caches">
+    		<set>
+    			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+    				<property name="name" value="default"></property>
+    			</bean>
+    			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+    				<property name="name" value="moniCache"></property>
+    			</bean>
+    		</set>
+    	</property>
+    </bean> -->
+
+</beans>

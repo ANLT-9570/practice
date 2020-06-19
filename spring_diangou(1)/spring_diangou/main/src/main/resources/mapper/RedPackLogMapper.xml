@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dg.main.dao.orders.RedPackLogMapper">
+    <select id="selectCount" resultType="int">
+		SELECT count(*) FROM [red_pack_log]
+	</select>
+	<resultMap type="com.dg.main.Entity.logs.RedPackLog" id="BaseResultMap">
+		<result property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="createTime" column="create_time"/>
+		<result property="redPackCode" column="redPackCode"/>
+		<result property="takeMoney" column="take_money"/>
+		<result property="leftMoney" column="left_money"/>
+		<result property="isTake" column="is_take"/>
+		<result property="takeTime" column="take_time"/>
+<!--		<result property="withdrawStreamCode" column="withdraw_stream_code"/>-->
+<!--		<result property="currentRate" column="current_rate"/>-->
+<!--		<result property="thirdCode" column="third_code"/>-->
+<!--		<result property="thirdNumber" column="third_number"/>-->
+<!--		<result property="thirdInfoId" column="third_info_id"/>-->
+	</resultMap>
+    <!-- 分页 -->
+	<select id="selectPageAll" resultType="com.dg.main.Entity.logs.RedPackLog">
+		select * from red_pack_log ORDER BY id  LIMIT #{limit} OFFSET ${offset};
+	</select>
+
+	<insert id="save" parameterType="com.dg.main.Entity.logs.RedPackLog">
+		insert into red_pack_log(user_id,take_money,left_money,redPackCode,create_time,is_take,take_time)
+		values(#{userId},#{takeMoney},#{leftMoney},#{redPackCode},#{createTime},#{isTake},#{takeTime});
+	</insert>
+
+    <select id="selectOne" parameterType="int" resultMap="BaseResultMap">
+		SELECT * FROM red_pack_log where id = #{id}
+	</select>
+	<select id="randRedPackLog" resultMap="BaseResultMap">
+			select top 1 * from red_pack_log where is_take=2 and redPackCode=#{code} and user_id is null ORDER BY NEWID()
+	</select>
+	<select id="UntakedList" resultMap="BaseResultMap">
+		select * from red_pack_log where is_take=2 and redPackCode=#{code}
+	</select>
+    <delete id="deleteAllId">
+        delete from red_pack_log where id in
+        <foreach collection="t" item="u" open="(" separator="," close=")">
+            ${u}
+        </foreach>
+    </delete>
+	<select id="findByCodeAndUserId"  resultMap="BaseResultMap">
+		select * from red_pack_log where user_id=#{userId} and redPackCode=#{code}
+	</select>
+    <update id="update" parameterType="com.dg.main.Entity.logs.RedPackLog">
+		update red_pack_log
+		set create_time = #{t.createTime},user_id=#{t.userId},is_take=#{t.isTake},take_time=#{t.takeTime}
+		where id=#{t.id}
+	</update>
+
+    <select id="findBy" parameterType="long" resultMap="BaseResultMap">
+		select * from red_pack_log  where id = #{id}
+	</select>
+    <delete id="deleteBy" parameterType="long">
+		delete from red_pack_log where  id = #{id}
+	</delete>
+</mapper>

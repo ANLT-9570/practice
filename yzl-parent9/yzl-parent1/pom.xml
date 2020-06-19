@@ -14,7 +14,7 @@
         <!-- log j日志文件管理包版本 -->
         <slf4j.version>1.7.7</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
-        <jackson.version>2.4.2</jackson.version>
+        <jackson.version>2.10.0.pr1</jackson.version>
         <poi.version>4.0.0</poi.version>
         <commons-beanutils.version>1.9.2</commons-beanutils.version>
         <commons-collections.version>3.2.1</commons-collections.version>
